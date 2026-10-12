@@ -1,645 +1,624 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2907
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
-{\colortbl;\red255\green255\blue255;\red22\green79\blue199;\red255\green255\blue255;\red46\green49\blue51;
-\red77\green80\blue85;\red133\green85\blue4;\red17\green93\blue62;\red102\green36\blue165;\red136\green143\blue149;
-}
-{\*\expandedcolortbl;;\cssrgb\c9804\c40392\c82353;\cssrgb\c100000\c100000\c100000;\cssrgb\c23529\c25098\c26275;
-\cssrgb\c37255\c38824\c40784;\cssrgb\c59608\c40784\c392;\cssrgb\c4314\c43137\c30980;\cssrgb\c48235\c23922\c70588;\cssrgb\c60392\c62745\c65098;
-}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\deftab720
-\pard\pardeftab720\partightenfactor0
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo GTC 45 - Sistema Integrado de Gestión</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        /* Custom scrollbar for the large matrix */
+        .table-container::-webkit-scrollbar {
+            height: 12px;
+            width: 12px;
+        }
+        .table-container::-webkit-scrollbar-track {
+            background: #e5e7eb;
+            border-radius: 8px;
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background-color: #9ca3af;
+            border-radius: 8px;
+            border: 3px solid #e5e7eb;
+        }
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background-color: #6b7280;
+        }
+        .sticky-col {
+            position: sticky;
+            left: 0;
+            background-color: #f9fafb;
+            z-index: 10;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="text-gray-800 h-screen flex overflow-hidden">
 
-\f0\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 <!DOCTYPE\cf4 \strokec4  html\cf2 \strokec2 >\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\partightenfactor0
-\cf5 \cb3 \strokec5 <\cf2 \strokec2 html\cf4 \strokec4  \cf6 \strokec6 lang\cf5 \strokec5 =\cf7 \strokec7 "es"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 <\cf2 \strokec2 head\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\partightenfactor0
-\cf4 \cb3     \cf5 \strokec5 <\cf2 \strokec2 meta\cf4 \strokec4  \cf6 \strokec6 charset\cf5 \strokec5 =\cf7 \strokec7 "UTF-8"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 <\cf2 \strokec2 meta\cf4 \strokec4  \cf6 \strokec6 name\cf5 \strokec5 =\cf7 \strokec7 "viewport"\cf4 \strokec4  \cf6 \strokec6 content\cf5 \strokec5 =\cf7 \strokec7 "width=device-width, initial-scale=1.0"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 <\cf2 \strokec2 title\cf5 \strokec5 >\cf4 \strokec4 M\'f3dulo GTC 45 - Sistema Integrado de Gesti\'f3n\cf5 \strokec5 </\cf2 \strokec2 title\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 <\cf2 \strokec2 script\cf4 \strokec4  \cf6 \strokec6 src\cf5 \strokec5 =\cf7 \strokec7 "https://cdn.tailwindcss.com"\cf5 \strokec5 ></\cf2 \strokec2 script\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 <\cf2 \strokec2 link\cf4 \strokec4  \cf6 \strokec6 href\cf5 \strokec5 =\cf7 \strokec7 "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"\cf4 \strokec4  \cf6 \strokec6 rel\cf5 \strokec5 =\cf7 \strokec7 "stylesheet"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 <\cf2 \strokec2 style\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf8 \strokec8 @import\cf4 \strokec4  \cf7 \strokec7 url\cf5 \strokec5 (\cf7 \strokec7 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'\cf5 \strokec5 );\cf4 \cb1 \strokec4 \
-\cb3         \cf2 \strokec2 body\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 font-family:\cf4 \strokec4  \cf7 \strokec7 'Inter'\cf5 \strokec5 ,\cf4 \strokec4  \cf7 \strokec7 sans-serif\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 background-color:\cf4 \strokec4  \cf7 \strokec7 #f3f4f6\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 \}\cf4 \cb1 \strokec4 \
-\cb3         \cf9 \strokec9 /* Custom scrollbar for the large matrix */\cf4 \cb1 \strokec4 \
-\cb3         \cf2 \strokec2 .table-container::-webkit-scrollbar\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 height:\cf4 \strokec4  \cf7 \strokec7 12px\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 width:\cf4 \strokec4  \cf7 \strokec7 12px\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 \}\cf4 \cb1 \strokec4 \
-\cb3         \cf2 \strokec2 .table-container::-webkit-scrollbar-track\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 background:\cf4 \strokec4  \cf7 \strokec7 #e5e7eb\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 border-radius:\cf4 \strokec4  \cf7 \strokec7 8px\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 \}\cf4 \cb1 \strokec4 \
-\cb3         \cf2 \strokec2 .table-container::-webkit-scrollbar-thumb\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 background-color:\cf4 \strokec4  \cf7 \strokec7 #9ca3af\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 border-radius:\cf4 \strokec4  \cf7 \strokec7 8px\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 border:\cf4 \strokec4  \cf7 \strokec7 3px\cf4 \strokec4  \cf7 \strokec7 solid\cf4 \strokec4  \cf7 \strokec7 #e5e7eb\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 \}\cf4 \cb1 \strokec4 \
-\cb3         \cf2 \strokec2 .table-container::-webkit-scrollbar-thumb:hover\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 background-color:\cf4 \strokec4  \cf7 \strokec7 #6b7280\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 \}\cf4 \cb1 \strokec4 \
-\cb3         \cf2 \strokec2 .sticky-col\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 position:\cf4 \strokec4  \cf7 \strokec7 sticky\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 left:\cf4 \strokec4  \cf7 \strokec7 0\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 background-color:\cf4 \strokec4  \cf7 \strokec7 #f9fafb\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 z-index:\cf4 \strokec4  \cf7 \strokec7 10\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf6 \strokec6 box-shadow:\cf4 \strokec4  \cf7 \strokec7 2px\cf4 \strokec4  \cf7 \strokec7 0\cf4 \strokec4  \cf7 \strokec7 5px\cf4 \strokec4  \cf7 \strokec7 rgba(0\cf5 \strokec5 ,\cf7 \strokec7 0\cf5 \strokec5 ,\cf7 \strokec7 0\cf5 \strokec5 ,\cf7 \strokec7 0.05)\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 \}\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 </\cf2 \strokec2 style\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\partightenfactor0
-\cf5 \cb3 \strokec5 </\cf2 \strokec2 head\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 <\cf2 \strokec2 body\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-gray-800 h-screen flex overflow-hidden"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\
-\pard\pardeftab720\partightenfactor0
-\cf4 \cb3     \cf5 \strokec5 <\cf2 \strokec2 aside\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-64 bg-slate-900 text-white flex flex-col hidden md:flex"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "h-16 flex items-center px-6 border-b border-slate-700"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-shield-halved text-blue-400 text-2xl mr-3"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 span\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-lg font-bold tracking-wider"\cf5 \strokec5 >\cf4 \strokec4 SIG SSO\cf5 \strokec5 </\cf2 \strokec2 span\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "px-6 py-4 border-b border-slate-700"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-xs text-slate-400 uppercase tracking-wider mb-1"\cf5 \strokec5 >\cf4 \strokec4 Empresa\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-sm font-semibold truncate text-blue-300"\cf5 \strokec5 >\cf4 \strokec4 Compuequip DOS S.A.\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 <\cf2 \strokec2 nav\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex-1 px-4 py-4 space-y-2 overflow-y-auto"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 a\cf4 \strokec4  \cf6 \strokec6 href\cf5 \strokec5 =\cf7 \strokec7 "#"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-lg transition-colors"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-chart-pie w-6"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \strokec4  Dashboard\cb1 \
-\cb3             \cf5 \strokec5 </\cf2 \strokec2 a\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 a\cf4 \strokec4  \cf6 \strokec6 href\cf5 \strokec5 =\cf7 \strokec7 "#"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex items-center px-4 py-3 bg-blue-600 text-white rounded-lg transition-colors shadow-lg shadow-blue-900/20"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-table-list w-6"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \strokec4  Matriz GTC 45\cb1 \
-\cb3             \cf5 \strokec5 </\cf2 \strokec2 a\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 a\cf4 \strokec4  \cf6 \strokec6 href\cf5 \strokec5 =\cf7 \strokec7 "#"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-lg transition-colors"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-users w-6"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \strokec4  Organigrama\cb1 \
-\cb3             \cf5 \strokec5 </\cf2 \strokec2 a\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 a\cf4 \strokec4  \cf6 \strokec6 href\cf5 \strokec5 =\cf7 \strokec7 "#"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-lg transition-colors"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-file-contract w-6"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \strokec4  Inspecciones\cb1 \
-\cb3             \cf5 \strokec5 </\cf2 \strokec2 a\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 a\cf4 \strokec4  \cf6 \strokec6 href\cf5 \strokec5 =\cf7 \strokec7 "#"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-lg transition-colors"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-gear w-6"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \strokec4  Configuraci\'f3n\cb1 \
-\cb3             \cf5 \strokec5 </\cf2 \strokec2 a\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 </\cf2 \strokec2 nav\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-4 border-t border-slate-700"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex items-center"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 img\cf4 \strokec4  \cf6 \strokec6 src\cf5 \strokec5 =\cf7 \strokec7 "https://ui-avatars.com/api/?name=Director+SSO&background=0D8ABC&color=fff"\cf4 \strokec4  \cf6 \strokec6 alt\cf5 \strokec5 =\cf7 \strokec7 "User"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-8 h-8 rounded-full mr-3"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-sm font-medium"\cf5 \strokec5 >\cf4 \strokec4 Director SSO\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-xs text-slate-400"\cf5 \strokec5 >\cf4 \strokec4 Admin\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 </\cf2 \strokec2 aside\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\
-\cb3     \cf5 \strokec5 <\cf2 \strokec2 main\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex-1 flex flex-col h-screen overflow-hidden"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf9 \strokec9 <!-- Header -->\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 <\cf2 \strokec2 header\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 shadow-sm z-20"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex items-center"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 button\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "md:hidden text-gray-500 hover:text-gray-700 mr-4"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-bars text-xl"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 button\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 h1\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-xl font-semibold text-gray-800"\cf5 \strokec5 >\cf4 \strokec4 Identificaci\'f3n de Peligros y Valoraci\'f3n de Riesgos (GTC 45)\cf5 \strokec5 </\cf2 \strokec2 h1\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex items-center space-x-4"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 button\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-gray-400 hover:text-blue-600 transition"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-bell text-lg"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 button\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 button\cf4 \strokec4  \cf6 \strokec6 onclick\cf5 \strokec5 =\cf7 \strokec7 "document.getElementById('modalRisk').classList.remove('hidden')"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm flex items-center"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-plus mr-2"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \strokec4  Nuevo Riesgo\cb1 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 button\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 </\cf2 \strokec2 header\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\
-\cb3         \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-6 flex-1 overflow-hidden flex flex-col"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf9 \strokec9 <!-- Stats Row -->\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "grid grid-cols-1 md:grid-cols-4 gap-4 mb-6"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex items-center"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-4"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-briefcase text-xl"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-sm text-gray-500 font-medium"\cf5 \strokec5 >\cf4 \strokec4 Puestos Evaluados\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-2xl font-bold text-gray-800"\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "stat-puestos"\cf5 \strokec5 >\cf4 \strokec4 0\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex items-center"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 mr-4"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-triangle-exclamation text-xl"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-sm text-gray-500 font-medium"\cf5 \strokec5 >\cf4 \strokec4 Riesgos No Aceptables (I)\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-2xl font-bold text-gray-800"\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "stat-riesgos-i"\cf5 \strokec5 >\cf4 \strokec4 0\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex items-center"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 mr-4"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-bolt text-xl"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-sm text-gray-500 font-medium"\cf5 \strokec5 >\cf4 \strokec4 Riesgos Nivel II\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-2xl font-bold text-gray-800"\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "stat-riesgos-ii"\cf5 \strokec5 >\cf4 \strokec4 0\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex items-center"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-4"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-check-shield text-xl"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-sm text-gray-500 font-medium"\cf5 \strokec5 >\cf4 \strokec4 Riesgos Aceptables (III/IV)\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-2xl font-bold text-gray-800"\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "stat-riesgos-ok"\cf5 \strokec5 >\cf4 \strokec4 0\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\
-\cb3             \cf9 \strokec9 <!-- Matrix Table Area -->\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "bg-white rounded-xl shadow-sm border border-gray-200 flex-1 flex flex-col overflow-hidden relative"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf9 \strokec9 <!-- Toolbar -->\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-4 border-b border-gray-200 flex justify-between items-center bg-gray-50"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "relative w-64"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-search absolute left-3 top-2.5 text-gray-400"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 input\cf4 \strokec4  \cf6 \strokec6 type\cf5 \strokec5 =\cf7 \strokec7 "text"\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "searchInput"\cf4 \strokec4  \cf6 \strokec6 placeholder\cf5 \strokec5 =\cf7 \strokec7 "Buscar cargo o proceso..."\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-full pl-9 pr-4 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex space-x-2"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 button\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded-lg text-sm hover:bg-gray-50 transition flex items-center"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-filter mr-2"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \strokec4  Filtros\cb1 \
-\cb3                         \cf5 \strokec5 </\cf2 \strokec2 button\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 button\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "bg-green-600 text-white px-3 py-2 rounded-lg text-sm hover:bg-green-700 transition flex items-center"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 i\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fa-solid fa-file-excel mr-2"\cf5 \strokec5 ></\cf2 \strokec2 i\cf5 \strokec5 >\cf4 \strokec4  Exportar\cb1 \
-\cb3                         \cf5 \strokec5 </\cf2 \strokec2 button\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\
-\cb3                 \cf9 \strokec9 <!-- Table Wrapper -->\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "overflow-auto table-container flex-1 bg-white"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 table\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-full text-left border-collapse min-w-[2000px]"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 thead\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 tr\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "bg-slate-800 text-white text-xs uppercase tracking-wider"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 sticky-col font-semibold"\cf5 \strokec5 >\cf4 \strokec4 Proceso / \'c1rea\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 sticky-col font-semibold"\cf4 \strokec4  \cf6 \strokec6 style\cf5 \strokec5 =\cf7 \strokec7 "left: 150px;"\cf5 \strokec5 >\cf4 \strokec4 Cargo\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold border-l border-slate-600"\cf5 \strokec5 >\cf4 \strokec4 Zona/Lugar\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold"\cf5 \strokec5 >\cf4 \strokec4 Actividades\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold text-center"\cf5 \strokec5 >\cf4 \strokec4 Rut.\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold border-l border-slate-600 bg-slate-700"\cf5 \strokec5 >\cf4 \strokec4 Clasificaci\'f3n Peligro\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold bg-slate-700"\cf5 \strokec5 >\cf4 \strokec4 Descripci\'f3n Peligro\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold bg-slate-700"\cf5 \strokec5 >\cf4 \strokec4 Efectos Posibles\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold border-l border-slate-600 text-center"\cf4 \strokec4  \cf6 \strokec6 title\cf5 \strokec5 =\cf7 \strokec7 "Nivel de Deficiencia"\cf5 \strokec5 >\cf4 \strokec4 ND\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold text-center"\cf4 \strokec4  \cf6 \strokec6 title\cf5 \strokec5 =\cf7 \strokec7 "Nivel de Exposici\'f3n"\cf5 \strokec5 >\cf4 \strokec4 NE\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold text-center"\cf4 \strokec4  \cf6 \strokec6 title\cf5 \strokec5 =\cf7 \strokec7 "Nivel de Probabilidad"\cf5 \strokec5 >\cf4 \strokec4 NP\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold text-center"\cf4 \strokec4  \cf6 \strokec6 title\cf5 \strokec5 =\cf7 \strokec7 "Interpretaci\'f3n NP"\cf5 \strokec5 >\cf4 \strokec4 Int. NP\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold text-center"\cf4 \strokec4  \cf6 \strokec6 title\cf5 \strokec5 =\cf7 \strokec7 "Nivel de Consecuencia"\cf5 \strokec5 >\cf4 \strokec4 NC\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold text-center border-l border-slate-600 bg-slate-900"\cf4 \strokec4  \cf6 \strokec6 title\cf5 \strokec5 =\cf7 \strokec7 "Nivel de Riesgo"\cf5 \strokec5 >\cf4 \strokec4 NR\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold text-center bg-slate-900"\cf5 \strokec5 >\cf4 \strokec4 Int. NR\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold border-l border-slate-600"\cf5 \strokec5 >\cf4 \strokec4 Medidas de Intervenci\'f3n\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                                 \cf5 \strokec5 <\cf2 \strokec2 th\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-3 border-b border-slate-700 font-semibold text-center"\cf5 \strokec5 >\cf4 \strokec4 Acciones\cf5 \strokec5 </\cf2 \strokec2 th\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 </\cf2 \strokec2 tr\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 </\cf2 \strokec2 thead\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 tbody\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "matrixBody"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-sm divide-y divide-gray-200"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf9 \strokec9 <!-- JS Will populate this -->\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 </\cf2 \strokec2 tbody\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 table\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 </\cf2 \strokec2 main\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\
-\cb3     \cf9 \strokec9 <!-- Modal for Add/Edit Risk -->\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "modalRisk"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden z-50 flex items-center justify-center overflow-y-auto"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "bg-white rounded-xl shadow-2xl w-full max-w-4xl my-8 mx-4"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex justify-between items-center p-6 border-b border-gray-100"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 h2\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-xl font-bold text-gray-800"\cf5 \strokec5 >\cf4 \strokec4 Registrar / Editar Riesgo (GTC 45)\cf5 \strokec5 </\cf2 \strokec2 h2\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 button\cf4 \strokec4  \cf6 \strokec6 onclick\cf5 \strokec5 =\cf7 \strokec7 "document.getElementById('modalRisk').classList.add('hidden')"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-gray-400 hover:text-red-500 text-2xl transition"\cf5 \strokec5 >\cf4 \strokec4 &times;\cf5 \strokec5 </\cf2 \strokec2 button\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cb1 \
-\cb3             \cf5 \strokec5 <\cf2 \strokec2 form\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "riskForm"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "p-6"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf9 \strokec9 <!-- Secci\'f3n 1: Puesto -->\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 h3\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-sm font-bold text-blue-600 uppercase tracking-wider mb-4 border-b pb-2"\cf5 \strokec5 >\cf4 \strokec4 1. Informaci\'f3n del Puesto\cf5 \strokec5 </\cf2 \strokec2 h3\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 label\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "block text-xs font-medium text-gray-700 mb-1"\cf5 \strokec5 >\cf4 \strokec4 Proceso / \'c1rea\cf5 \strokec5 </\cf2 \strokec2 label\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 input\cf4 \strokec4  \cf6 \strokec6 type\cf5 \strokec5 =\cf7 \strokec7 "text"\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "form-proceso"\cf4 \strokec4  \cf6 \strokec6 required\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 label\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "block text-xs font-medium text-gray-700 mb-1"\cf5 \strokec5 >\cf4 \strokec4 Cargo\cf5 \strokec5 </\cf2 \strokec2 label\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 input\cf4 \strokec4  \cf6 \strokec6 type\cf5 \strokec5 =\cf7 \strokec7 "text"\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "form-cargo"\cf4 \strokec4  \cf6 \strokec6 required\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 label\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "block text-xs font-medium text-gray-700 mb-1"\cf5 \strokec5 >\cf4 \strokec4 Zona / Lugar\cf5 \strokec5 </\cf2 \strokec2 label\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 input\cf4 \strokec4  \cf6 \strokec6 type\cf5 \strokec5 =\cf7 \strokec7 "text"\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "form-zona"\cf4 \strokec4  \cf6 \strokec6 required\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "md:col-span-2"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 label\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "block text-xs font-medium text-gray-700 mb-1"\cf5 \strokec5 >\cf4 \strokec4 Actividades Principales\cf5 \strokec5 </\cf2 \strokec2 label\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 input\cf4 \strokec4  \cf6 \strokec6 type\cf5 \strokec5 =\cf7 \strokec7 "text"\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "form-actividades"\cf4 \strokec4  \cf6 \strokec6 required\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 label\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "block text-xs font-medium text-gray-700 mb-1"\cf5 \strokec5 >\cf4 \strokec4 \'bfEs Rutinaria?\cf5 \strokec5 </\cf2 \strokec2 label\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 select\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "form-rutinaria"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "SI"\cf5 \strokec5 >\cf4 \strokec4 SI\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "NO"\cf5 \strokec5 >\cf4 \strokec4 NO\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 </\cf2 \strokec2 select\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\
-\cb3                 \cf9 \strokec9 <!-- Secci\'f3n 2: Peligro -->\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 h3\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-sm font-bold text-red-600 uppercase tracking-wider mb-4 border-b pb-2"\cf5 \strokec5 >\cf4 \strokec4 2. Identificaci\'f3n del Peligro\cf5 \strokec5 </\cf2 \strokec2 h3\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "grid grid-cols-1 md:grid-cols-2 gap-4 mb-6"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 label\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "block text-xs font-medium text-gray-700 mb-1"\cf5 \strokec5 >\cf4 \strokec4 Clasificaci\'f3n\cf5 \strokec5 </\cf2 \strokec2 label\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 select\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "form-clasificacion"\cf4 \strokec4  \cf6 \strokec6 required\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "Biol\'f3gico"\cf5 \strokec5 >\cf4 \strokec4 Biol\'f3gico\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "F\'edsico"\cf5 \strokec5 >\cf4 \strokec4 F\'edsico\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "Qu\'edmico"\cf5 \strokec5 >\cf4 \strokec4 Qu\'edmico\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "Psicosocial"\cf5 \strokec5 >\cf4 \strokec4 Psicosocial\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "Biomec\'e1nico"\cf5 \strokec5 >\cf4 \strokec4 Biomec\'e1nico\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "Condiciones de Seguridad"\cf5 \strokec5 >\cf4 \strokec4 Condiciones de Seguridad\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "Fen\'f3menos Naturales"\cf5 \strokec5 >\cf4 \strokec4 Fen\'f3menos Naturales\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 </\cf2 \strokec2 select\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 label\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "block text-xs font-medium text-gray-700 mb-1"\cf5 \strokec5 >\cf4 \strokec4 Descripci\'f3n del Peligro\cf5 \strokec5 </\cf2 \strokec2 label\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 input\cf4 \strokec4  \cf6 \strokec6 type\cf5 \strokec5 =\cf7 \strokec7 "text"\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "form-desc"\cf4 \strokec4  \cf6 \strokec6 required\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "md:col-span-2"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 label\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "block text-xs font-medium text-gray-700 mb-1"\cf5 \strokec5 >\cf4 \strokec4 Efectos Posibles\cf5 \strokec5 </\cf2 \strokec2 label\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 input\cf4 \strokec4  \cf6 \strokec6 type\cf5 \strokec5 =\cf7 \strokec7 "text"\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "form-efectos"\cf4 \strokec4  \cf6 \strokec6 required\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\
-\cb3                 \cf9 \strokec9 <!-- Secci\'f3n 3: Evaluaci\'f3n GTC 45 -->\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 h3\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-sm font-bold text-green-600 uppercase tracking-wider mb-4 border-b pb-2"\cf5 \strokec5 >\cf4 \strokec4 3. Evaluaci\'f3n (C\'e1lculo Autom\'e1tico)\cf5 \strokec5 </\cf2 \strokec2 h3\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 label\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "block text-xs font-medium text-gray-700 mb-1"\cf5 \strokec5 >\cf4 \strokec4 Nivel de Deficiencia (ND)\cf5 \strokec5 </\cf2 \strokec2 label\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 select\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "form-nd"\cf4 \strokec4  \cf6 \strokec6 onchange\cf5 \strokec5 =\cf7 \strokec7 "calcularRiesgoVisual()"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "10"\cf5 \strokec5 >\cf4 \strokec4 10 - Muy Alto\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "6"\cf5 \strokec5 >\cf4 \strokec4 6 - Alto\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "2"\cf5 \strokec5 >\cf4 \strokec4 2 - Medio\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "0"\cf5 \strokec5 >\cf4 \strokec4 0 - No Asignar\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 </\cf2 \strokec2 select\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 label\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "block text-xs font-medium text-gray-700 mb-1"\cf5 \strokec5 >\cf4 \strokec4 Nivel de Exposici\'f3n (NE)\cf5 \strokec5 </\cf2 \strokec2 label\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 select\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "form-ne"\cf4 \strokec4  \cf6 \strokec6 onchange\cf5 \strokec5 =\cf7 \strokec7 "calcularRiesgoVisual()"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "4"\cf5 \strokec5 >\cf4 \strokec4 4 - Continua\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "3"\cf5 \strokec5 >\cf4 \strokec4 3 - Frecuente\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "2"\cf5 \strokec5 >\cf4 \strokec4 2 - Ocasional\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "1"\cf5 \strokec5 >\cf4 \strokec4 1 - Espor\'e1dica\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 </\cf2 \strokec2 select\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 label\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "block text-xs font-medium text-gray-700 mb-1"\cf5 \strokec5 >\cf4 \strokec4 Nivel de Consecuencia (NC)\cf5 \strokec5 </\cf2 \strokec2 label\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 select\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "form-nc"\cf4 \strokec4  \cf6 \strokec6 onchange\cf5 \strokec5 =\cf7 \strokec7 "calcularRiesgoVisual()"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "100"\cf5 \strokec5 >\cf4 \strokec4 100 - Mortal / Catastr\'f3fico\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "60"\cf5 \strokec5 >\cf4 \strokec4 60 - Muy Grave\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "25"\cf5 \strokec5 >\cf4 \strokec4 25 - Grave\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 option\cf4 \strokec4  \cf6 \strokec6 value\cf5 \strokec5 =\cf7 \strokec7 "10"\cf5 \strokec5 >\cf4 \strokec4 10 - Leve\cf5 \strokec5 </\cf2 \strokec2 option\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 </\cf2 \strokec2 select\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cb1 \
-\cb3                     \cf9 \strokec9 <!-- Resultados calculados en tiempo real -->\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "md:col-span-3 flex gap-4 mt-2 p-3 bg-white rounded shadow-sm border border-gray-100"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex-1 text-center border-r"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-xs text-gray-500"\cf5 \strokec5 >\cf4 \strokec4 Probabilidad (NP = NDxNE)\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "preview-np"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-lg font-bold text-gray-800"\cf5 \strokec5 >\cf4 \strokec4 --\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex-1 text-center border-r"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-xs text-gray-500"\cf5 \strokec5 >\cf4 \strokec4 Riesgo (NR = NPxNC)\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 p\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "preview-nr"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "text-lg font-bold text-gray-800"\cf5 \strokec5 >\cf4 \strokec4 --\cf5 \strokec5 </\cf2 \strokec2 p\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex-1 text-center flex items-center justify-center"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                             \cf5 \strokec5 <\cf2 \strokec2 span\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "preview-badge"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "px-3 py-1 rounded-full text-xs font-bold text-white bg-gray-400"\cf5 \strokec5 >\cf4 \strokec4 Interpretaci\'f3n Nivel\cf5 \strokec5 </\cf2 \strokec2 span\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                         \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cb1 \
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "mb-6"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 label\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "block text-xs font-medium text-gray-700 mb-1"\cf5 \strokec5 >\cf4 \strokec4 Medidas de Intervenci\'f3n (Eliminaci\'f3n, Sustituci\'f3n, Ing, Admin, EPP)\cf5 \strokec5 </\cf2 \strokec2 label\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 textarea\cf4 \strokec4  \cf6 \strokec6 id\cf5 \strokec5 =\cf7 \strokec7 "form-medidas"\cf4 \strokec4  \cf6 \strokec6 rows\cf5 \strokec5 =\cf7 \strokec7 "2"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"\cf5 \strokec5 ></\cf2 \strokec2 textarea\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\
-\cb3                 \cf5 \strokec5 <\cf2 \strokec2 div\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "flex justify-end space-x-3 pt-4 border-t border-gray-100"\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 button\cf4 \strokec4  \cf6 \strokec6 type\cf5 \strokec5 =\cf7 \strokec7 "button"\cf4 \strokec4  \cf6 \strokec6 onclick\cf5 \strokec5 =\cf7 \strokec7 "document.getElementById('modalRisk').classList.add('hidden')"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "px-4 py-2 border border-gray-300 rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition"\cf5 \strokec5 >\cf4 \strokec4 Cancelar\cf5 \strokec5 </\cf2 \strokec2 button\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                     \cf5 \strokec5 <\cf2 \strokec2 button\cf4 \strokec4  \cf6 \strokec6 type\cf5 \strokec5 =\cf7 \strokec7 "button"\cf4 \strokec4  \cf6 \strokec6 onclick\cf5 \strokec5 =\cf7 \strokec7 "saveRisk()"\cf4 \strokec4  \cf6 \strokec6 class\cf5 \strokec5 =\cf7 \strokec7 "px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition shadow-md"\cf5 \strokec5 >\cf4 \strokec4 Guardar en Matriz\cf5 \strokec5 </\cf2 \strokec2 button\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3                 \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 </\cf2 \strokec2 form\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 </\cf2 \strokec2 div\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\
-\cb3     \cf5 \strokec5 <\cf2 \strokec2 script\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cb3         \cf9 \strokec9 // Base de datos inicial precargada (Mapeo Compuequip DOS S.A.)\cf4 \cb1 \strokec4 \
-\cb3         \cf8 \strokec8 let\cf4 \strokec4  matrizData \cf5 \strokec5 =\cf4 \strokec4  \cf5 \strokec5 [\cf4 \cb1 \strokec4 \
-\cb3             \cf9 \strokec9 // --- GERENCIA GENERAL ---\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 1\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Gerencia General"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Gerente General"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Oficina Principal"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Trabajo administrativo, reuniones estrat\'e9gicas"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Psicosocial"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Gesti\'f3n administrativa, carga mental, toma de decisiones de alto nivel"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Estr\'e9s cr\'f3nico, ansiedad, fatiga mental"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 3\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Pausas activas, jornadas flexibles, chequeo m\'e9dico ejecutivo anual"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Gerencia General"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Abogado"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Oficina Principal"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Revisi\'f3n documental, lectura intensiva"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Biomec\'e1nico"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Postura sedente prolongada, uso de pantallas de visualizaci\'f3n de datos (PVD)"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Fatiga visual, s\'edndrome de ojo seco, lumbago"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 4\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Pausas activas visuales (regla 20-20-20), silla ergon\'f3mica"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cb1 \
-\cb3             \cf9 \strokec9 // --- COMERCIAL ---\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 3\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Comercial"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Gerente Comercial"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Oficina Principal"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Planificaci\'f3n de metas, seguimiento de ventas"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Psicosocial"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Alta responsabilidad por resultados, atenci\'f3n a clientes cr\'edticos"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Estr\'e9s, alteraciones del sue\'f1o"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 3\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Programa de bienestar laboral, pausas cognitivas"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 4\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Comercial"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Analista de Operaciones"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Oficina Principal"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Digitaci\'f3n de contratos, CRM"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Biomec\'e1nico"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Movimientos repetitivos de mano/mu\'f1eca en uso de mouse y teclado"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "S\'edndrome de t\'fanel carpiano, tendinitis"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 4\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Pad mouse con apoyo, teclado ergon\'f3mico, pausas activas"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 5\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Comercial"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Gerente de Cuentas"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Trabajo de Campo"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Visita a clientes, traslado vehicular"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Condiciones de Seguridad"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Riesgo P\'fablico (delincuencia com\'fan, robos) en calle"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Heridas, estr\'e9s postraum\'e1tico, p\'e9rdida de bienes"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 6\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 3\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 25\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Capacitaci\'f3n en seguridad ciudadana, seguimiento GPS, seguros"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 6\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Comercial"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Gerente de Cuentas"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Trabajo de Campo"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Conducci\'f3n en v\'edas urbanas/perimetrales"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Condiciones de Seguridad"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Accidentes de tr\'e1nsito por colisi\'f3n o atropellamiento"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Traumatismos severos, muerte"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 6\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 3\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 60\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Manejo defensivo, revisi\'f3n t\'e9cnico-mec\'e1nica de la flota"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\
-\cb3             \cf9 \strokec9 // --- CIBERSEGURIDAD & HYBRID CLOUD ---\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 7\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Ciberseguridad"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Gerente de Ciberseguridad"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Oficina Principal"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Monitoreo de alertas, gesti\'f3n estrat\'e9gica"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Psicosocial"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Carga de trabajo por incidentes cr\'edticos de seguridad 24/7"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Burnout, fatiga mental extrema"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 6\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 3\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Rotaci\'f3n de turnos en soporte cr\'edtico, desconexi\'f3n digital"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 8\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Ciberseguridad"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Arquitecto de Soluciones"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Oficina Principal"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Dise\'f1o de infraestructuras IT"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Biomec\'e1nico"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Postura est\'e1tica sedente frente a m\'faltiples monitores"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Cervicalgia, dolor lumbar"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 4\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Bases elevadoras de monitor, sillas ergon\'f3micas de alto confort"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 9\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Hybrid Cloud"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Ingeniero Preventa"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "En Sitio (Cliente)"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Levantamiento de requerimientos en locaciones de clientes"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Condiciones de Seguridad"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Riesgos locativos (pisos resbalosos, desniveles) en empresas terceras"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Ca\'eddas al mismo nivel, esguinces, contusiones"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Uso de calzado antideslizante, inducci\'f3n en sitio del cliente"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\
-\cb3             \cf9 \strokec9 // --- SERVICIOS: GESTI\'d3N Y ESPECIALISTAS ---\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Servicios - Gesti\'f3n"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Gerente de Servicios"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Oficina Principal"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Administraci\'f3n de personal t\'e9cnico, reportes"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Psicosocial"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Gesti\'f3n de personal operativo, cumplimiento de SLAs"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Estr\'e9s ocupacional, cefaleas tensionales"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 3\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Coaching de liderazgo, programas de manejo de tiempo"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 11\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Servicios - Especialistas"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "T\'e9cnico Especialista (Data Center)"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Datacenter"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Instalaci\'f3n de servidores, peinado de cables"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "F\'edsico"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Exposici\'f3n a ruido continuo emitido por racks y sistemas AC"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Hipoacusia neurosensorial inducida por ruido"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 4\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 25\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Protecci\'f3n auditiva tipo copa (NRR >25dB), audiometr\'edas peri\'f3dicas"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 12\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Servicios - Especialistas"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "T\'e9cnico Especialista (Data Center)"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Datacenter"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Conexi\'f3n de PDUs y fuentes de poder"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "NO"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Condiciones de Seguridad"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Riesgo el\'e9ctrico por manipulaci\'f3n de equipos energizados (baja tensi\'f3n)"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Electrocuci\'f3n, quemaduras, paro card\'edaco"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 6\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 60\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Procedimiento de Bloqueo y Etiquetado (LOTO), herramientas diel\'e9ctricas"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 13\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Servicios - Especialistas"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "T\'e9cnico Especialista (Data Center)"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Datacenter"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Montaje de switches y servidores en racks"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "NO"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Biomec\'e1nico"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Sobreesfuerzo por levantamiento manual de cargas (equipos pesados)"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Hernias discales, espasmos lumbares"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 6\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 25\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Uso de elevadores mec\'e1nicos (rack lifts), trabajo en parejas"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\
-\cb3             \cf9 \strokec9 // --- SERVICIOS: SOPORTE ---\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 14\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Servicios - Soporte"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "T\'e9cnico de Soporte"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "En Sitio (Cliente)"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Mantenimiento preventivo de computadoras"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Biomec\'e1nico"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Posturas forzadas (cuclillas, flexi\'f3n de tronco) bajo escritorios"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Lesiones musculoesquel\'e9ticas de rodilla y columna"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 6\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 3\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Capacitaci\'f3n en higiene postural, rodilleras de apoyo"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 15\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Servicios - Soporte"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "T\'e9cnico de Soporte"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Laboratorio"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Sopleteo y limpieza de componentes electr\'f3nicos"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "F\'edsico"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Proyecci\'f3n de material particulado (polvo) durante sopleteo"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Irritaci\'f3n ocular, conjuntivitis"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 3\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Gafas de seguridad de policarbonato envolventes"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 16\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Servicios - Soporte"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "T\'e9cnico de Soporte"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Laboratorio"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Limpieza profunda de equipos"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Qu\'edmico"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Inhalaci\'f3n de vapores por uso de alcohol isoprop\'edlico y limpia contactos"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Irritaci\'f3n de v\'edas respiratorias, mareos"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Uso en \'e1reas ventiladas, mascarilla para vapores org\'e1nicos"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\
-\cb3             \cf9 \strokec9 // --- TALENTO HUMANO ---\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 17\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Talento Humano"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "VP Talento Humano"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Oficina Principal"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Negociaciones, reestructuraciones"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Psicosocial"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Alta exigencia emocional en resoluci\'f3n de conflictos laborales"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Estr\'e9s agudo, trastornos g\'e1stricos"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "L\'ednea de apoyo psicol\'f3gico (EAP)"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 18\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Talento Humano"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "M\'e9dico Ocupacional"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Consultorio M\'e9dico"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Atenci\'f3n primaria a colaboradores enfermos"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Biol\'f3gico"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Exposici\'f3n a virus y bacterias pat\'f3genas por contacto directo"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Enfermedades infectocontagiosas (ej. Covid, Influenza)"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 3\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 25\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "EPP Biol\'f3gico (Mascarilla N95, guantes), vacunaci\'f3n completa, lavado de manos"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 19\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Talento Humano"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "T\'e9cnico SSO"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Instalaciones"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Inspecciones de seguridad en altura y \'e1reas operativas"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "NO"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Condiciones de Seguridad"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Trabajo en alturas (inspecci\'f3n de techos, racks altos)"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Ca\'edda a distinto nivel, fracturas, trauma craneoencef\'e1lico"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 6\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 1\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 60\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Permiso de trabajo, uso de arn\'e9s de cuerpo entero y l\'ednea de vida"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\
-\cb3             \cf9 \strokec9 // --- MARKETING Y CX ---\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 20\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Marketing y CX"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Dise\'f1ador Gr\'e1fico"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Oficina Principal"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Creaci\'f3n de piezas gr\'e1ficas"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Biomec\'e1nico"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Uso continuo del mouse, alta demanda visual en detalles"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Tendinitis de Quervain, fatiga visual severa"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 4\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Mouse vertical, descansos visuales obligatorios, iluminaci\'f3n adecuada"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\
-\cb3             \cf9 \strokec9 // --- FINANCIERO ---\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 21\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Financiero"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Gerente Financiero"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Oficina Principal"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Cierres contables, an\'e1lisis de flujos"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Psicosocial"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Presi\'f3n temporal (cierres de fin de mes), alta responsabilidad financiera"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Burnout, hipertensi\'f3n por estr\'e9s"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 6\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Planificaci\'f3n anticipada de cierres, pausas activas grupales"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 22\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Financiero"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Analista de Contabilidad"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Oficina Principal"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Conciliaci\'f3n bancaria, digitaci\'f3n num\'e9rica"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Biomec\'e1nico"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Postura sedente en VDT, iluminaci\'f3n de pantallas"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Lumbago, fatiga visual"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 4\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Filtros de luz azul en monitores, soporte lumbar"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\
-\cb3             \cf9 \strokec9 // --- BODEGA Y LOG\'cdSTICA ---\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 23\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Financiero - Bodega"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Asistente de Bodega"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Bodega General"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Recepci\'f3n, despacho y percheo de equipos (laptops, servidores)"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Biomec\'e1nico"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Levantamiento, transporte y empuje manual de cargas"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Hernias discales, lesiones dorsolumbares agudas"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 6\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 4\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 25\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Uso de estibadores/carretillas manuales, faja de prevenci\'f3n (soporte), l\'edmite de 25kg"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 24\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Financiero - Bodega"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Asistente de Bodega"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Bodega General"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Almacenamiento en estanter\'edas altas"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Condiciones de Seguridad"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Locativo: Riesgo de ca\'edda de objetos desde alturas (perchas)"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Traumatismos contusos, golpes en la cabeza o pies"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 6\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 3\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 25\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Uso de casco de seguridad, zapatos con puntera de acero, sujeci\'f3n de cajas"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 25\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Financiero - Log\'edstica"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Mensajero"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Trabajo de Campo"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Entrega de equipos y documentos en motocicleta"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Condiciones de Seguridad"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Accidentes de tr\'e1nsito (colisiones, derrapes, ca\'eddas)"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Politraumatismos graves, invalidez, muerte"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 6\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 4\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 100\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Casco certificado integral, guantes, chaqueta con protecciones, mantenimiento de moto"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 26\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Financiero - Log\'edstica"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Mensajero"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Trabajo de Campo"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Desplazamiento a la intemperie"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Fen\'f3menos Naturales"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Exposici\'f3n a condiciones clim\'e1ticas adversas (lluvia extrema, tormentas el\'e9ctricas)"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Resfriados, ca\'eddas de la moto por calzada mojada"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 25\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Traje impermeable reflectivo, suspensi\'f3n de ruta en tormenta severa"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \},\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 27\cf5 \strokec5 ,\cf4 \strokec4  proceso\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Financiero - Log\'edstica"\cf5 \strokec5 ,\cf4 \strokec4  cargo\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Mensajero"\cf5 \strokec5 ,\cf4 \strokec4  zona\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Trabajo de Campo"\cf5 \strokec5 ,\cf4 \strokec4  actividades\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Desplazamiento a la intemperie diurno"\cf5 \strokec5 ,\cf4 \strokec4  rutinaria\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "SI"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "F\'edsico"\cf5 \strokec5 ,\cf4 \strokec4  descripcion\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Exposici\'f3n a radiaci\'f3n solar UV de forma continua"\cf5 \strokec5 ,\cf4 \strokec4  efectos\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Quemaduras solares, insolaci\'f3n, c\'e1ncer de piel a largo plazo"\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 2\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 4\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 25\cf5 \strokec5 ,\cf4 \strokec4  medidas\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 "Provisi\'f3n y uso obligatorio de protector solar SPF 50+, ropa manga larga"\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \}\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 ];\cf4 \cb1 \strokec4 \
-\
-\cb3         \cf9 \strokec9 // Funci\'f3n central del motor matem\'e1tico GTC 45\cf4 \cb1 \strokec4 \
-\cb3         \cf8 \strokec8 function\cf4 \strokec4  calcularGTC45\cf5 \strokec5 (\cf4 \strokec4 nd\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 )\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3             nd \cf5 \strokec5 =\cf4 \strokec4  parseInt\cf5 \strokec5 (\cf4 \strokec4 nd\cf5 \strokec5 );\cf4 \cb1 \strokec4 \
-\cb3             ne \cf5 \strokec5 =\cf4 \strokec4  parseInt\cf5 \strokec5 (\cf4 \strokec4 ne\cf5 \strokec5 );\cf4 \cb1 \strokec4 \
-\cb3             nc \cf5 \strokec5 =\cf4 \strokec4  parseInt\cf5 \strokec5 (\cf4 \strokec4 nc\cf5 \strokec5 );\cf4 \cb1 \strokec4 \
-\cb3             \cb1 \
-\cb3             \cf9 \strokec9 // Si ND es 0 (No se asigna), la GTC 45 indica no continuar la valoraci\'f3n cuantitativa o asumirla como controlada\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 if\cf5 \strokec5 (\cf4 \strokec4 nd \cf5 \strokec5 ===\cf4 \strokec4  \cf6 \strokec6 0\cf5 \strokec5 )\cf4 \strokec4  \cf8 \strokec8 return\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \strokec4  np\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 0\cf5 \strokec5 ,\cf4 \strokec4  intNp\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 'Bajo'\cf5 \strokec5 ,\cf4 \strokec4  nr\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 0\cf5 \strokec5 ,\cf4 \strokec4  intNr\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 'IV'\cf5 \strokec5 ,\cf4 \strokec4  color\cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 'bg-green-100 text-green-800'\cf4 \strokec4  \cf5 \strokec5 \};\cf4 \cb1 \strokec4 \
-\
-\cb3             \cf8 \strokec8 let\cf4 \strokec4  np \cf5 \strokec5 =\cf4 \strokec4  nd \cf5 \strokec5 *\cf4 \strokec4  ne\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 let\cf4 \strokec4  intNp \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 ''\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 if\cf5 \strokec5 (\cf4 \strokec4 np \cf5 \strokec5 >=\cf4 \strokec4  \cf6 \strokec6 24\cf5 \strokec5 )\cf4 \strokec4  intNp \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 'Muy Alto'\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 else\cf4 \strokec4  \cf8 \strokec8 if\cf5 \strokec5 (\cf4 \strokec4 np \cf5 \strokec5 >=\cf4 \strokec4  \cf6 \strokec6 10\cf5 \strokec5 )\cf4 \strokec4  intNp \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 'Alto'\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 else\cf4 \strokec4  \cf8 \strokec8 if\cf5 \strokec5 (\cf4 \strokec4 np \cf5 \strokec5 >=\cf4 \strokec4  \cf6 \strokec6 6\cf5 \strokec5 )\cf4 \strokec4  intNp \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 'Medio'\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 else\cf4 \strokec4  intNp \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 'Bajo'\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\
-\cb3             \cf8 \strokec8 let\cf4 \strokec4  nr \cf5 \strokec5 =\cf4 \strokec4  np \cf5 \strokec5 *\cf4 \strokec4  nc\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 let\cf4 \strokec4  intNr \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 ''\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 let\cf4 \strokec4  color \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 ''\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\
-\cb3             \cf9 \strokec9 // Escala de Nivel de Riesgo GTC 45\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 if\cf5 \strokec5 (\cf4 \strokec4 nr \cf5 \strokec5 >=\cf4 \strokec4  \cf6 \strokec6 600\cf5 \strokec5 )\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 intNr \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 'I (No Aceptable)'\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3                 color \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 'bg-red-500 text-white font-bold'\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \}\cf4 \strokec4  \cf8 \strokec8 else\cf4 \strokec4  \cf8 \strokec8 if\cf4 \strokec4  \cf5 \strokec5 (\cf4 \strokec4 nr \cf5 \strokec5 >=\cf4 \strokec4  \cf6 \strokec6 150\cf5 \strokec5 )\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 intNr \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 'II (No Aceptable/Ctrl)'\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3                 color \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 'bg-yellow-400 text-yellow-900 font-bold'\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \}\cf4 \strokec4  \cf8 \strokec8 else\cf4 \strokec4  \cf8 \strokec8 if\cf4 \strokec4  \cf5 \strokec5 (\cf4 \strokec4 nr \cf5 \strokec5 >=\cf4 \strokec4  \cf6 \strokec6 40\cf5 \strokec5 )\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 intNr \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 'III (Aceptable)'\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3                 color \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 'bg-green-400 text-green-900 font-bold'\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \}\cf4 \strokec4  \cf8 \strokec8 else\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 intNr \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 'IV (Aceptable)'\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3                 color \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 'bg-emerald-200 text-emerald-800 font-bold'\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \}\cf4 \cb1 \strokec4 \
-\
-\cb3             \cf8 \strokec8 return\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \strokec4  np\cf5 \strokec5 ,\cf4 \strokec4  intNp\cf5 \strokec5 ,\cf4 \strokec4  nr\cf5 \strokec5 ,\cf4 \strokec4  intNr\cf5 \strokec5 ,\cf4 \strokec4  color \cf5 \strokec5 \};\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 \}\cf4 \cb1 \strokec4 \
-\
-\cb3         \cf8 \strokec8 function\cf4 \strokec4  renderTable\cf5 \strokec5 ()\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 const\cf4 \strokec4  tbody \cf5 \strokec5 =\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'matrixBody'\cf5 \strokec5 );\cf4 \cb1 \strokec4 \
-\cb3             tbody\cf5 \strokec5 .\cf4 \strokec4 innerHTML \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 ''\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cb1 \
-\cb3             \cf8 \strokec8 let\cf4 \strokec4  stats \cf5 \strokec5 =\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \strokec4  puestos\cf5 \strokec5 :\cf4 \strokec4  matrizData\cf5 \strokec5 .\cf4 \strokec4 length\cf5 \strokec5 ,\cf4 \strokec4  i\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 0\cf5 \strokec5 ,\cf4 \strokec4  ii\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 0\cf5 \strokec5 ,\cf4 \strokec4  ok\cf5 \strokec5 :\cf4 \strokec4  \cf6 \strokec6 0\cf4 \strokec4  \cf5 \strokec5 \};\cf4 \cb1 \strokec4 \
-\
-\cb3             matrizData\cf5 \strokec5 .\cf4 \strokec4 forEach\cf5 \strokec5 ((\cf4 \strokec4 row\cf5 \strokec5 ,\cf4 \strokec4  index\cf5 \strokec5 )\cf4 \strokec4  \cf5 \strokec5 =>\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 \cf8 \strokec8 const\cf4 \strokec4  evalData \cf5 \strokec5 =\cf4 \strokec4  calcularGTC45\cf5 \strokec5 (\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 nd\cf5 \strokec5 ,\cf4 \strokec4  row\cf5 \strokec5 .\cf4 \strokec4 ne\cf5 \strokec5 ,\cf4 \strokec4  row\cf5 \strokec5 .\cf4 \strokec4 nc\cf5 \strokec5 );\cf4 \cb1 \strokec4 \
-\cb3                 \cb1 \
-\cb3                 \cf9 \strokec9 // Actualizar Estad\'edsticas\cf4 \cb1 \strokec4 \
-\cb3                 \cf8 \strokec8 if\cf5 \strokec5 (\cf4 \strokec4 evalData\cf5 \strokec5 .\cf4 \strokec4 nr \cf5 \strokec5 >=\cf4 \strokec4  \cf6 \strokec6 600\cf5 \strokec5 )\cf4 \strokec4  stats\cf5 \strokec5 .\cf4 \strokec4 i\cf5 \strokec5 ++;\cf4 \cb1 \strokec4 \
-\cb3                 \cf8 \strokec8 else\cf4 \strokec4  \cf8 \strokec8 if\cf5 \strokec5 (\cf4 \strokec4 evalData\cf5 \strokec5 .\cf4 \strokec4 nr \cf5 \strokec5 >=\cf4 \strokec4  \cf6 \strokec6 150\cf5 \strokec5 )\cf4 \strokec4  stats\cf5 \strokec5 .\cf4 \strokec4 ii\cf5 \strokec5 ++;\cf4 \cb1 \strokec4 \
-\cb3                 \cf8 \strokec8 else\cf4 \strokec4  stats\cf5 \strokec5 .\cf4 \strokec4 ok\cf5 \strokec5 ++;\cf4 \cb1 \strokec4 \
-\
-\cb3                 \cf9 \strokec9 // Generar HTML fila\cf4 \cb1 \strokec4 \
-\cb3                 \cf8 \strokec8 const\cf4 \strokec4  tr \cf5 \strokec5 =\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 createElement\cf5 \strokec5 (\cf7 \strokec7 'tr'\cf5 \strokec5 );\cf4 \cb1 \strokec4 \
-\cb3                 tr\cf5 \strokec5 .\cf4 \strokec4 className \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 'hover:bg-blue-50/50 transition-colors group'\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3                 tr\cf5 \strokec5 .\cf4 \strokec4 innerHTML \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 `\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\partightenfactor0
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 sticky-col font-medium text-gray-800">\cf5 \strokec5 $\{\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 proceso\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 sticky-col text-blue-600 font-medium" style="left: 150px;">\cf5 \strokec5 $\{\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 cargo\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 border-l border-gray-200">\cf5 \strokec5 $\{\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 zona\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 max-w-xs truncate" title="\cf5 \strokec5 $\{\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 actividades\cf5 \strokec5 \}\cf7 \strokec7 ">\cf5 \strokec5 $\{\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 actividades\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 text-center">\cf5 \strokec5 $\{\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 rutinaria\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 border-l border-gray-200 bg-gray-50/50"><span class="px-2 py-1 bg-gray-200 text-gray-700 rounded text-xs font-semibold">\cf5 \strokec5 $\{\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 clasificacion\cf5 \strokec5 \}\cf7 \strokec7 </span></td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 bg-gray-50/50 max-w-xs truncate" title="\cf5 \strokec5 $\{\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 descripcion\cf5 \strokec5 \}\cf7 \strokec7 ">\cf5 \strokec5 $\{\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 descripcion\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 bg-gray-50/50 text-red-600 text-xs">\cf5 \strokec5 $\{\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 efectos\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 border-l border-gray-200 text-center font-bold text-gray-600">\cf5 \strokec5 $\{\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 nd\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 text-center font-bold text-gray-600">\cf5 \strokec5 $\{\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 ne\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 text-center font-bold text-blue-600 bg-blue-50/30">\cf5 \strokec5 $\{\cf4 \strokec4 evalData\cf5 \strokec5 .\cf4 \strokec4 np\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 text-center text-xs font-semibold text-gray-600 bg-blue-50/30">\cf5 \strokec5 $\{\cf4 \strokec4 evalData\cf5 \strokec5 .\cf4 \strokec4 intNp\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 text-center font-bold text-gray-600">\cf5 \strokec5 $\{\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 nc\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 border-l border-gray-200 text-center font-black text-lg \cf5 \strokec5 $\{\cf4 \strokec4 evalData\cf5 \strokec5 .\cf4 \strokec4 color\cf5 \strokec5 \}\cf7 \strokec7 ">\cf5 \strokec5 $\{\cf4 \strokec4 evalData\cf5 \strokec5 .\cf4 \strokec4 nr\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 text-center \cf5 \strokec5 $\{\cf4 \strokec4 evalData\cf5 \strokec5 .\cf4 \strokec4 color\cf5 \strokec5 \}\cf7 \strokec7  text-xs">\cf5 \strokec5 $\{\cf4 \strokec4 evalData\cf5 \strokec5 .\cf4 \strokec4 intNr\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 border-l border-gray-200 text-xs text-gray-600 max-w-sm">\cf5 \strokec5 $\{\cf4 \strokec4 row\cf5 \strokec5 .\cf4 \strokec4 medidas\cf5 \strokec5 \}\cf7 \strokec7 </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     <td class="p-3 border-b border-gray-200 text-center">\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                         <button onclick="deleteRisk(\cf5 \strokec5 $\{\cf4 \strokec4 index\cf5 \strokec5 \}\cf7 \strokec7 )" class="text-red-400 hover:text-red-600 p-1 rounded hover:bg-red-50" title="Eliminar"><i class="fa-solid fa-trash"></i></button>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                     </td>\cf4 \cb1 \strokec4 \
-\cf7 \cb3 \strokec7                 `\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\partightenfactor0
-\cf4 \cb3                 tbody\cf5 \strokec5 .\cf4 \strokec4 appendChild\cf5 \strokec5 (\cf4 \strokec4 tr\cf5 \strokec5 );\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \});\cf4 \cb1 \strokec4 \
-\
-\cb3             \cf9 \strokec9 // Actualizar Dashboards\cf4 \cb1 \strokec4 \
-\cb3             document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'stat-puestos'\cf5 \strokec5 ).\cf4 \strokec4 innerText \cf5 \strokec5 =\cf4 \strokec4  stats\cf5 \strokec5 .\cf4 \strokec4 puestos\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'stat-riesgos-i'\cf5 \strokec5 ).\cf4 \strokec4 innerText \cf5 \strokec5 =\cf4 \strokec4  stats\cf5 \strokec5 .\cf4 \strokec4 i\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'stat-riesgos-ii'\cf5 \strokec5 ).\cf4 \strokec4 innerText \cf5 \strokec5 =\cf4 \strokec4  stats\cf5 \strokec5 .\cf4 \strokec4 ii\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'stat-riesgos-ok'\cf5 \strokec5 ).\cf4 \strokec4 innerText \cf5 \strokec5 =\cf4 \strokec4  stats\cf5 \strokec5 .\cf4 \strokec4 ok\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 \}\cf4 \cb1 \strokec4 \
-\
-\cb3         \cf8 \strokec8 function\cf4 \strokec4  calcularRiesgoVisual\cf5 \strokec5 ()\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 const\cf4 \strokec4  nd \cf5 \strokec5 =\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-nd'\cf5 \strokec5 ).\cf4 \strokec4 value\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 const\cf4 \strokec4  ne \cf5 \strokec5 =\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-ne'\cf5 \strokec5 ).\cf4 \strokec4 value\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 const\cf4 \strokec4  nc \cf5 \strokec5 =\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-nc'\cf5 \strokec5 ).\cf4 \strokec4 value\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cb1 \
-\cb3             \cf8 \strokec8 const\cf4 \strokec4  r \cf5 \strokec5 =\cf4 \strokec4  calcularGTC45\cf5 \strokec5 (\cf4 \strokec4 nd\cf5 \strokec5 ,\cf4 \strokec4  ne\cf5 \strokec5 ,\cf4 \strokec4  nc\cf5 \strokec5 );\cf4 \cb1 \strokec4 \
-\cb3             \cb1 \
-\cb3             document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'preview-np'\cf5 \strokec5 ).\cf4 \strokec4 innerText \cf5 \strokec5 =\cf4 \strokec4  r\cf5 \strokec5 .\cf4 \strokec4 np\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'preview-nr'\cf5 \strokec5 ).\cf4 \strokec4 innerText \cf5 \strokec5 =\cf4 \strokec4  r\cf5 \strokec5 .\cf4 \strokec4 nr\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cb1 \
-\cb3             \cf8 \strokec8 const\cf4 \strokec4  badge \cf5 \strokec5 =\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'preview-badge'\cf5 \strokec5 );\cf4 \cb1 \strokec4 \
-\cb3             badge\cf5 \strokec5 .\cf4 \strokec4 innerText \cf5 \strokec5 =\cf4 \strokec4  r\cf5 \strokec5 .\cf4 \strokec4 intNr\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             badge\cf5 \strokec5 .\cf4 \strokec4 className \cf5 \strokec5 =\cf4 \strokec4  \cf7 \strokec7 `px-3 py-1 rounded-full text-xs font-bold \cf5 \strokec5 $\{\cf4 \strokec4 r\cf5 \strokec5 .\cf4 \strokec4 color\cf5 \strokec5 \}\cf7 \strokec7 `\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 \}\cf4 \cb1 \strokec4 \
-\
-\cb3         \cf8 \strokec8 function\cf4 \strokec4  saveRisk\cf5 \strokec5 ()\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 const\cf4 \strokec4  newRisk \cf5 \strokec5 =\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 id\cf5 \strokec5 :\cf4 \strokec4  \cf2 \strokec2 Date\cf5 \strokec5 .\cf4 \strokec4 now\cf5 \strokec5 (),\cf4 \cb1 \strokec4 \
-\cb3                 proceso\cf5 \strokec5 :\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-proceso'\cf5 \strokec5 ).\cf4 \strokec4 value\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 cargo\cf5 \strokec5 :\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-cargo'\cf5 \strokec5 ).\cf4 \strokec4 value\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 zona\cf5 \strokec5 :\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-zona'\cf5 \strokec5 ).\cf4 \strokec4 value\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 actividades\cf5 \strokec5 :\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-actividades'\cf5 \strokec5 ).\cf4 \strokec4 value\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 rutinaria\cf5 \strokec5 :\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-rutinaria'\cf5 \strokec5 ).\cf4 \strokec4 value\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 clasificacion\cf5 \strokec5 :\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-clasificacion'\cf5 \strokec5 ).\cf4 \strokec4 value\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 descripcion\cf5 \strokec5 :\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-desc'\cf5 \strokec5 ).\cf4 \strokec4 value\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 efectos\cf5 \strokec5 :\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-efectos'\cf5 \strokec5 ).\cf4 \strokec4 value\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nd\cf5 \strokec5 :\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-nd'\cf5 \strokec5 ).\cf4 \strokec4 value\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 ne\cf5 \strokec5 :\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-ne'\cf5 \strokec5 ).\cf4 \strokec4 value\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 nc\cf5 \strokec5 :\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-nc'\cf5 \strokec5 ).\cf4 \strokec4 value\cf5 \strokec5 ,\cf4 \cb1 \strokec4 \
-\cb3                 medidas\cf5 \strokec5 :\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'form-medidas'\cf5 \strokec5 ).\cf4 \strokec4 value\cb1 \
-\cb3             \cf5 \strokec5 \};\cf4 \cb1 \strokec4 \
-\
-\cb3             \cf9 \strokec9 // Validar que no haya campos b\'e1sicos vac\'edos\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 if\cf5 \strokec5 (!\cf4 \strokec4 newRisk\cf5 \strokec5 .\cf4 \strokec4 proceso \cf5 \strokec5 ||\cf4 \strokec4  \cf5 \strokec5 !\cf4 \strokec4 newRisk\cf5 \strokec5 .\cf4 \strokec4 cargo \cf5 \strokec5 ||\cf4 \strokec4  \cf5 \strokec5 !\cf4 \strokec4 newRisk\cf5 \strokec5 .\cf4 \strokec4 descripcion\cf5 \strokec5 )\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 alert\cf5 \strokec5 (\cf7 \strokec7 "Por favor, completa los campos requeridos (Proceso, Cargo, Descripci\'f3n del Peligro)."\cf5 \strokec5 );\cf4 \strokec4  \cf9 \strokec9 // Native alert kept minimal for simple validation, replaced in real prod systems with toast\cf4 \cb1 \strokec4 \
-\cb3                 \cf8 \strokec8 return\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \}\cf4 \cb1 \strokec4 \
-\
-\cb3             matrizData\cf5 \strokec5 .\cf4 \strokec4 push\cf5 \strokec5 (\cf4 \strokec4 newRisk\cf5 \strokec5 );\cf4 \cb1 \strokec4 \
-\cb3             renderTable\cf5 \strokec5 ();\cf4 \cb1 \strokec4 \
-\cb3             document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'modalRisk'\cf5 \strokec5 ).\cf4 \strokec4 classList\cf5 \strokec5 .\cf4 \strokec4 add\cf5 \strokec5 (\cf7 \strokec7 'hidden'\cf5 \strokec5 );\cf4 \cb1 \strokec4 \
-\cb3             document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'riskForm'\cf5 \strokec5 ).\cf4 \strokec4 reset\cf5 \strokec5 ();\cf4 \cb1 \strokec4 \
-\cb3             calcularRiesgoVisual\cf5 \strokec5 ();\cf4 \strokec4  \cf9 \strokec9 // Reset visualizer\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 \}\cf4 \cb1 \strokec4 \
-\
-\cb3         \cf8 \strokec8 function\cf4 \strokec4  deleteRisk\cf5 \strokec5 (\cf4 \strokec4 index\cf5 \strokec5 )\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3             \cf9 \strokec9 // Modaled confirm replacement to avoid native alerts breaking iframe rules\cf4 \cb1 \strokec4 \
-\cb3             matrizData\cf5 \strokec5 .\cf4 \strokec4 splice\cf5 \strokec5 (\cf4 \strokec4 index\cf5 \strokec5 ,\cf4 \strokec4  \cf6 \strokec6 1\cf5 \strokec5 );\cf4 \cb1 \strokec4 \
-\cb3             renderTable\cf5 \strokec5 ();\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 \}\cf4 \cb1 \strokec4 \
-\
-\cb3         \cf9 \strokec9 // Buscador b\'e1sico\cf4 \cb1 \strokec4 \
-\cb3         document\cf5 \strokec5 .\cf4 \strokec4 getElementById\cf5 \strokec5 (\cf7 \strokec7 'searchInput'\cf5 \strokec5 ).\cf4 \strokec4 addEventListener\cf5 \strokec5 (\cf7 \strokec7 'keyup'\cf5 \strokec5 ,\cf4 \strokec4  \cf8 \strokec8 function\cf5 \strokec5 (\cf4 \strokec4 e\cf5 \strokec5 )\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 const\cf4 \strokec4  term \cf5 \strokec5 =\cf4 \strokec4  e\cf5 \strokec5 .\cf4 \strokec4 target\cf5 \strokec5 .\cf4 \strokec4 value\cf5 \strokec5 .\cf4 \strokec4 toLowerCase\cf5 \strokec5 ();\cf4 \cb1 \strokec4 \
-\cb3             \cf8 \strokec8 const\cf4 \strokec4  rows \cf5 \strokec5 =\cf4 \strokec4  document\cf5 \strokec5 .\cf4 \strokec4 querySelectorAll\cf5 \strokec5 (\cf7 \strokec7 '#matrixBody tr'\cf5 \strokec5 );\cf4 \cb1 \strokec4 \
-\cb3             rows\cf5 \strokec5 .\cf4 \strokec4 forEach\cf5 \strokec5 (\cf4 \strokec4 row \cf5 \strokec5 =>\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3                 \cf8 \strokec8 const\cf4 \strokec4  text \cf5 \strokec5 =\cf4 \strokec4  row\cf5 \strokec5 .\cf4 \strokec4 innerText\cf5 \strokec5 .\cf4 \strokec4 toLowerCase\cf5 \strokec5 ();\cf4 \cb1 \strokec4 \
-\cb3                 row\cf5 \strokec5 .\cf4 \strokec4 style\cf5 \strokec5 .\cf4 \strokec4 display \cf5 \strokec5 =\cf4 \strokec4  text\cf5 \strokec5 .\cf4 \strokec4 includes\cf5 \strokec5 (\cf4 \strokec4 term\cf5 \strokec5 )\cf4 \strokec4  \cf5 \strokec5 ?\cf4 \strokec4  \cf7 \strokec7 ''\cf4 \strokec4  \cf5 \strokec5 :\cf4 \strokec4  \cf7 \strokec7 'none'\cf5 \strokec5 ;\cf4 \cb1 \strokec4 \
-\cb3             \cf5 \strokec5 \});\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 \});\cf4 \cb1 \strokec4 \
-\
-\cb3         \cf9 \strokec9 // Init\cf4 \cb1 \strokec4 \
-\cb3         window\cf5 \strokec5 .\cf4 \strokec4 onload \cf5 \strokec5 =\cf4 \strokec4  \cf5 \strokec5 ()\cf4 \strokec4  \cf5 \strokec5 =>\cf4 \strokec4  \cf5 \strokec5 \{\cf4 \cb1 \strokec4 \
-\cb3             renderTable\cf5 \strokec5 ();\cf4 \cb1 \strokec4 \
-\cb3             calcularRiesgoVisual\cf5 \strokec5 ();\cf4 \cb1 \strokec4 \
-\cb3         \cf5 \strokec5 \};\cf4 \cb1 \strokec4 \
-\cb3     \cf5 \strokec5 </\cf2 \strokec2 script\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\partightenfactor0
-\cf5 \cb3 \strokec5 </\cf2 \strokec2 body\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 </\cf2 \strokec2 html\cf5 \strokec5 >\cf4 \cb1 \strokec4 \
-}
+    <aside class="w-64 bg-slate-900 text-white flex flex-col hidden md:flex">
+        <div class="h-16 flex items-center px-6 border-b border-slate-700">
+            <i class="fa-solid fa-shield-halved text-blue-400 text-2xl mr-3"></i>
+            <span class="text-lg font-bold tracking-wider">SIG SSO</span>
+        </div>
+        <div class="px-6 py-4 border-b border-slate-700">
+            <p class="text-xs text-slate-400 uppercase tracking-wider mb-1">Empresa</p>
+            <p class="text-sm font-semibold truncate text-blue-300">Compuequip DOS S.A.</p>
+        </div>
+        <nav class="flex-1 px-4 py-4 space-y-2 overflow-y-auto">
+            <a href="#" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-lg transition-colors">
+                <i class="fa-solid fa-chart-pie w-6"></i> Dashboard
+            </a>
+            <a href="#" class="flex items-center px-4 py-3 bg-blue-600 text-white rounded-lg transition-colors shadow-lg shadow-blue-900/20">
+                <i class="fa-solid fa-table-list w-6"></i> Matriz GTC 45
+            </a>
+            <a href="#" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-lg transition-colors">
+                <i class="fa-solid fa-users w-6"></i> Organigrama
+            </a>
+            <a href="#" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-lg transition-colors">
+                <i class="fa-solid fa-file-contract w-6"></i> Inspecciones
+            </a>
+            <a href="#" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-lg transition-colors">
+                <i class="fa-solid fa-gear w-6"></i> Configuración
+            </a>
+        </nav>
+        <div class="p-4 border-t border-slate-700">
+            <div class="flex items-center">
+                <img src="https://ui-avatars.com/api/?name=Director+SSO&background=0D8ABC&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                <div>
+                    <p class="text-sm font-medium">Director SSO</p>
+                    <p class="text-xs text-slate-400">Admin</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-screen overflow-hidden">
+        <!-- Header -->
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 shadow-sm z-20">
+            <div class="flex items-center">
+                <button class="md:hidden text-gray-500 hover:text-gray-700 mr-4">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <h1 class="text-xl font-semibold text-gray-800">Identificación de Peligros y Valoración de Riesgos (GTC 45)</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="text-gray-400 hover:text-blue-600 transition">
+                    <i class="fa-solid fa-bell text-lg"></i>
+                </button>
+                <button onclick="document.getElementById('modalRisk').classList.remove('hidden')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm flex items-center">
+                    <i class="fa-solid fa-plus mr-2"></i> Nuevo Riesgo
+                </button>
+            </div>
+        </header>
+
+        <div class="p-6 flex-1 overflow-hidden flex flex-col">
+            <!-- Stats Row -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-4">
+                        <i class="fa-solid fa-briefcase text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium">Puestos Evaluados</p>
+                        <p class="text-2xl font-bold text-gray-800" id="stat-puestos">0</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 mr-4">
+                        <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium">Riesgos No Aceptables (I)</p>
+                        <p class="text-2xl font-bold text-gray-800" id="stat-riesgos-i">0</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 mr-4">
+                        <i class="fa-solid fa-bolt text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium">Riesgos Nivel II</p>
+                        <p class="text-2xl font-bold text-gray-800" id="stat-riesgos-ii">0</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex items-center">
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-4">
+                        <i class="fa-solid fa-check-shield text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 font-medium">Riesgos Aceptables (III/IV)</p>
+                        <p class="text-2xl font-bold text-gray-800" id="stat-riesgos-ok">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Matrix Table Area -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 flex-1 flex flex-col overflow-hidden relative">
+                <!-- Toolbar -->
+                <div class="p-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
+                    <div class="relative w-64">
+                        <i class="fa-solid fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                        <input type="text" id="searchInput" placeholder="Buscar cargo o proceso..." class="w-full pl-9 pr-4 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded-lg text-sm hover:bg-gray-50 transition flex items-center">
+                            <i class="fa-solid fa-filter mr-2"></i> Filtros
+                        </button>
+                        <button class="bg-green-600 text-white px-3 py-2 rounded-lg text-sm hover:bg-green-700 transition flex items-center">
+                            <i class="fa-solid fa-file-excel mr-2"></i> Exportar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Table Wrapper -->
+                <div class="overflow-auto table-container flex-1 bg-white">
+                    <table class="w-full text-left border-collapse min-w-[2000px]">
+                        <thead>
+                            <tr class="bg-slate-800 text-white text-xs uppercase tracking-wider">
+                                <th class="p-3 border-b border-slate-700 sticky-col font-semibold">Proceso / Área</th>
+                                <th class="p-3 border-b border-slate-700 sticky-col font-semibold" style="left: 150px;">Cargo</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold border-l border-slate-600">Zona/Lugar</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold">Actividades</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold text-center">Rut.</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold border-l border-slate-600 bg-slate-700">Clasificación Peligro</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold bg-slate-700">Descripción Peligro</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold bg-slate-700">Efectos Posibles</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold border-l border-slate-600 text-center" title="Nivel de Deficiencia">ND</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold text-center" title="Nivel de Exposición">NE</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold text-center" title="Nivel de Probabilidad">NP</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold text-center" title="Interpretación NP">Int. NP</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold text-center" title="Nivel de Consecuencia">NC</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold text-center border-l border-slate-600 bg-slate-900" title="Nivel de Riesgo">NR</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold text-center bg-slate-900">Int. NR</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold border-l border-slate-600">Medidas de Intervención</th>
+                                <th class="p-3 border-b border-slate-700 font-semibold text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="matrixBody" class="text-sm divide-y divide-gray-200">
+                            <!-- JS Will populate this -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Add/Edit Risk -->
+    <div id="modalRisk" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden z-50 flex items-center justify-center overflow-y-auto">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl my-8 mx-4">
+            <div class="flex justify-between items-center p-6 border-b border-gray-100">
+                <h2 class="text-xl font-bold text-gray-800">Registrar / Editar Riesgo (GTC 45)</h2>
+                <button onclick="document.getElementById('modalRisk').classList.add('hidden')" class="text-gray-400 hover:text-red-500 text-2xl transition">&times;</button>
+            </div>
+            
+            <form id="riskForm" class="p-6">
+                <!-- Sección 1: Puesto -->
+                <h3 class="text-sm font-bold text-blue-600 uppercase tracking-wider mb-4 border-b pb-2">1. Información del Puesto</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Proceso / Área</label>
+                        <input type="text" id="form-proceso" required class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Cargo</label>
+                        <input type="text" id="form-cargo" required class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Zona / Lugar</label>
+                        <input type="text" id="form-zona" required class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Actividades Principales</label>
+                        <input type="text" id="form-actividades" required class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">¿Es Rutinaria?</label>
+                        <select id="form-rutinaria" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="SI">SI</option>
+                            <option value="NO">NO</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Sección 2: Peligro -->
+                <h3 class="text-sm font-bold text-red-600 uppercase tracking-wider mb-4 border-b pb-2">2. Identificación del Peligro</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Clasificación</label>
+                        <select id="form-clasificacion" required class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="Biológico">Biológico</option>
+                            <option value="Físico">Físico</option>
+                            <option value="Químico">Químico</option>
+                            <option value="Psicosocial">Psicosocial</option>
+                            <option value="Biomecánico">Biomecánico</option>
+                            <option value="Condiciones de Seguridad">Condiciones de Seguridad</option>
+                            <option value="Fenómenos Naturales">Fenómenos Naturales</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Descripción del Peligro</label>
+                        <input type="text" id="form-desc" required class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Efectos Posibles</label>
+                        <input type="text" id="form-efectos" required class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+                </div>
+
+                <!-- Sección 3: Evaluación GTC 45 -->
+                <h3 class="text-sm font-bold text-green-600 uppercase tracking-wider mb-4 border-b pb-2">3. Evaluación (Cálculo Automático)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Nivel de Deficiencia (ND)</label>
+                        <select id="form-nd" onchange="calcularRiesgoVisual()" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="10">10 - Muy Alto</option>
+                            <option value="6">6 - Alto</option>
+                            <option value="2">2 - Medio</option>
+                            <option value="0">0 - No Asignar</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Nivel de Exposición (NE)</label>
+                        <select id="form-ne" onchange="calcularRiesgoVisual()" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="4">4 - Continua</option>
+                            <option value="3">3 - Frecuente</option>
+                            <option value="2">2 - Ocasional</option>
+                            <option value="1">1 - Esporádica</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1">Nivel de Consecuencia (NC)</label>
+                        <select id="form-nc" onchange="calcularRiesgoVisual()" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="100">100 - Mortal / Catastrófico</option>
+                            <option value="60">60 - Muy Grave</option>
+                            <option value="25">25 - Grave</option>
+                            <option value="10">10 - Leve</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Resultados calculados en tiempo real -->
+                    <div class="md:col-span-3 flex gap-4 mt-2 p-3 bg-white rounded shadow-sm border border-gray-100">
+                        <div class="flex-1 text-center border-r">
+                            <p class="text-xs text-gray-500">Probabilidad (NP = NDxNE)</p>
+                            <p id="preview-np" class="text-lg font-bold text-gray-800">--</p>
+                        </div>
+                        <div class="flex-1 text-center border-r">
+                            <p class="text-xs text-gray-500">Riesgo (NR = NPxNC)</p>
+                            <p id="preview-nr" class="text-lg font-bold text-gray-800">--</p>
+                        </div>
+                        <div class="flex-1 text-center flex items-center justify-center">
+                            <span id="preview-badge" class="px-3 py-1 rounded-full text-xs font-bold text-white bg-gray-400">Interpretación Nivel</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Medidas de Intervención (Eliminación, Sustitución, Ing, Admin, EPP)</label>
+                    <textarea id="form-medidas" rows="2" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                </div>
+
+                <div class="flex justify-end space-x-3 pt-4 border-t border-gray-100">
+                    <button type="button" onclick="document.getElementById('modalRisk').classList.add('hidden')" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition">Cancelar</button>
+                    <button type="button" onclick="saveRisk()" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition shadow-md">Guardar en Matriz</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Base de datos inicial precargada (Mapeo Compuequip DOS S.A.)
+        let matrizData = [
+            // --- GERENCIA GENERAL ---
+            {
+                id: 1, proceso: "Gerencia General", cargo: "Gerente General", zona: "Oficina Principal", actividades: "Trabajo administrativo, reuniones estratégicas", rutinaria: "SI",
+                clasificacion: "Psicosocial", descripcion: "Gestión administrativa, carga mental, toma de decisiones de alto nivel", efectos: "Estrés crónico, ansiedad, fatiga mental",
+                nd: 2, ne: 3, nc: 10, medidas: "Pausas activas, jornadas flexibles, chequeo médico ejecutivo anual"
+            },
+            {
+                id: 2, proceso: "Gerencia General", cargo: "Abogado", zona: "Oficina Principal", actividades: "Revisión documental, lectura intensiva", rutinaria: "SI",
+                clasificacion: "Biomecánico", descripcion: "Postura sedente prolongada, uso de pantallas de visualización de datos (PVD)", efectos: "Fatiga visual, síndrome de ojo seco, lumbago",
+                nd: 2, ne: 4, nc: 10, medidas: "Pausas activas visuales (regla 20-20-20), silla ergonómica"
+            },
+            
+            // --- COMERCIAL ---
+            {
+                id: 3, proceso: "Comercial", cargo: "Gerente Comercial", zona: "Oficina Principal", actividades: "Planificación de metas, seguimiento de ventas", rutinaria: "SI",
+                clasificacion: "Psicosocial", descripcion: "Alta responsabilidad por resultados, atención a clientes críticos", efectos: "Estrés, alteraciones del sueño",
+                nd: 2, ne: 3, nc: 10, medidas: "Programa de bienestar laboral, pausas cognitivas"
+            },
+            {
+                id: 4, proceso: "Comercial", cargo: "Analista de Operaciones", zona: "Oficina Principal", actividades: "Digitación de contratos, CRM", rutinaria: "SI",
+                clasificacion: "Biomecánico", descripcion: "Movimientos repetitivos de mano/muñeca en uso de mouse y teclado", efectos: "Síndrome de túnel carpiano, tendinitis",
+                nd: 2, ne: 4, nc: 10, medidas: "Pad mouse con apoyo, teclado ergonómico, pausas activas"
+            },
+            {
+                id: 5, proceso: "Comercial", cargo: "Gerente de Cuentas", zona: "Trabajo de Campo", actividades: "Visita a clientes, traslado vehicular", rutinaria: "SI",
+                clasificacion: "Condiciones de Seguridad", descripcion: "Riesgo Público (delincuencia común, robos) en calle", efectos: "Heridas, estrés postraumático, pérdida de bienes",
+                nd: 6, ne: 3, nc: 25, medidas: "Capacitación en seguridad ciudadana, seguimiento GPS, seguros"
+            },
+            {
+                id: 6, proceso: "Comercial", cargo: "Gerente de Cuentas", zona: "Trabajo de Campo", actividades: "Conducción en vías urbanas/perimetrales", rutinaria: "SI",
+                clasificacion: "Condiciones de Seguridad", descripcion: "Accidentes de tránsito por colisión o atropellamiento", efectos: "Traumatismos severos, muerte",
+                nd: 6, ne: 3, nc: 60, medidas: "Manejo defensivo, revisión técnico-mecánica de la flota"
+            },
+
+            // --- CIBERSEGURIDAD & HYBRID CLOUD ---
+            {
+                id: 7, proceso: "Ciberseguridad", cargo: "Gerente de Ciberseguridad", zona: "Oficina Principal", actividades: "Monitoreo de alertas, gestión estratégica", rutinaria: "SI",
+                clasificacion: "Psicosocial", descripcion: "Carga de trabajo por incidentes críticos de seguridad 24/7", efectos: "Burnout, fatiga mental extrema",
+                nd: 6, ne: 3, nc: 10, medidas: "Rotación de turnos en soporte crítico, desconexión digital"
+            },
+            {
+                id: 8, proceso: "Ciberseguridad", cargo: "Arquitecto de Soluciones", zona: "Oficina Principal", actividades: "Diseño de infraestructuras IT", rutinaria: "SI",
+                clasificacion: "Biomecánico", descripcion: "Postura estática sedente frente a múltiples monitores", efectos: "Cervicalgia, dolor lumbar",
+                nd: 2, ne: 4, nc: 10, medidas: "Bases elevadoras de monitor, sillas ergonómicas de alto confort"
+            },
+            {
+                id: 9, proceso: "Hybrid Cloud", cargo: "Ingeniero Preventa", zona: "En Sitio (Cliente)", actividades: "Levantamiento de requerimientos en locaciones de clientes", rutinaria: "SI",
+                clasificacion: "Condiciones de Seguridad", descripcion: "Riesgos locativos (pisos resbalosos, desniveles) en empresas terceras", efectos: "Caídas al mismo nivel, esguinces, contusiones",
+                nd: 2, ne: 2, nc: 10, medidas: "Uso de calzado antideslizante, inducción en sitio del cliente"
+            },
+
+            // --- SERVICIOS: GESTIÓN Y ESPECIALISTAS ---
+            {
+                id: 10, proceso: "Servicios - Gestión", cargo: "Gerente de Servicios", zona: "Oficina Principal", actividades: "Administración de personal técnico, reportes", rutinaria: "SI",
+                clasificacion: "Psicosocial", descripcion: "Gestión de personal operativo, cumplimiento de SLAs", efectos: "Estrés ocupacional, cefaleas tensionales",
+                nd: 2, ne: 3, nc: 10, medidas: "Coaching de liderazgo, programas de manejo de tiempo"
+            },
+            {
+                id: 11, proceso: "Servicios - Especialistas", cargo: "Técnico Especialista (Data Center)", zona: "Datacenter", actividades: "Instalación de servidores, peinado de cables", rutinaria: "SI",
+                clasificacion: "Físico", descripcion: "Exposición a ruido continuo emitido por racks y sistemas AC", efectos: "Hipoacusia neurosensorial inducida por ruido",
+                nd: 2, ne: 4, nc: 25, medidas: "Protección auditiva tipo copa (NRR >25dB), audiometrías periódicas"
+            },
+            {
+                id: 12, proceso: "Servicios - Especialistas", cargo: "Técnico Especialista (Data Center)", zona: "Datacenter", actividades: "Conexión de PDUs y fuentes de poder", rutinaria: "NO",
+                clasificacion: "Condiciones de Seguridad", descripcion: "Riesgo eléctrico por manipulación de equipos energizados (baja tensión)", efectos: "Electrocución, quemaduras, paro cardíaco",
+                nd: 6, ne: 2, nc: 60, medidas: "Procedimiento de Bloqueo y Etiquetado (LOTO), herramientas dieléctricas"
+            },
+            {
+                id: 13, proceso: "Servicios - Especialistas", cargo: "Técnico Especialista (Data Center)", zona: "Datacenter", actividades: "Montaje de switches y servidores en racks", rutinaria: "NO",
+                clasificacion: "Biomecánico", descripcion: "Sobreesfuerzo por levantamiento manual de cargas (equipos pesados)", efectos: "Hernias discales, espasmos lumbares",
+                nd: 6, ne: 2, nc: 25, medidas: "Uso de elevadores mecánicos (rack lifts), trabajo en parejas"
+            },
+
+            // --- SERVICIOS: SOPORTE ---
+            {
+                id: 14, proceso: "Servicios - Soporte", cargo: "Técnico de Soporte", zona: "En Sitio (Cliente)", actividades: "Mantenimiento preventivo de computadoras", rutinaria: "SI",
+                clasificacion: "Biomecánico", descripcion: "Posturas forzadas (cuclillas, flexión de tronco) bajo escritorios", efectos: "Lesiones musculoesqueléticas de rodilla y columna",
+                nd: 6, ne: 3, nc: 10, medidas: "Capacitación en higiene postural, rodilleras de apoyo"
+            },
+            {
+                id: 15, proceso: "Servicios - Soporte", cargo: "Técnico de Soporte", zona: "Laboratorio", actividades: "Sopleteo y limpieza de componentes electrónicos", rutinaria: "SI",
+                clasificacion: "Físico", descripcion: "Proyección de material particulado (polvo) durante sopleteo", efectos: "Irritación ocular, conjuntivitis",
+                nd: 2, ne: 3, nc: 10, medidas: "Gafas de seguridad de policarbonato envolventes"
+            },
+            {
+                id: 16, proceso: "Servicios - Soporte", cargo: "Técnico de Soporte", zona: "Laboratorio", actividades: "Limpieza profunda de equipos", rutinaria: "SI",
+                clasificacion: "Químico", descripcion: "Inhalación de vapores por uso de alcohol isopropílico y limpia contactos", efectos: "Irritación de vías respiratorias, mareos",
+                nd: 2, ne: 2, nc: 10, medidas: "Uso en áreas ventiladas, mascarilla para vapores orgánicos"
+            },
+
+            // --- TALENTO HUMANO ---
+            {
+                id: 17, proceso: "Talento Humano", cargo: "VP Talento Humano", zona: "Oficina Principal", actividades: "Negociaciones, reestructuraciones", rutinaria: "SI",
+                clasificacion: "Psicosocial", descripcion: "Alta exigencia emocional en resolución de conflictos laborales", efectos: "Estrés agudo, trastornos gástricos",
+                nd: 2, ne: 2, nc: 10, medidas: "Línea de apoyo psicológico (EAP)"
+            },
+            {
+                id: 18, proceso: "Talento Humano", cargo: "Médico Ocupacional", zona: "Consultorio Médico", actividades: "Atención primaria a colaboradores enfermos", rutinaria: "SI",
+                clasificacion: "Biológico", descripcion: "Exposición a virus y bacterias patógenas por contacto directo", efectos: "Enfermedades infectocontagiosas (ej. Covid, Influenza)",
+                nd: 2, ne: 3, nc: 25, medidas: "EPP Biológico (Mascarilla N95, guantes), vacunación completa, lavado de manos"
+            },
+            {
+                id: 19, proceso: "Talento Humano", cargo: "Técnico SSO", zona: "Instalaciones", actividades: "Inspecciones de seguridad en altura y áreas operativas", rutinaria: "NO",
+                clasificacion: "Condiciones de Seguridad", descripcion: "Trabajo en alturas (inspección de techos, racks altos)", efectos: "Caída a distinto nivel, fracturas, trauma craneoencefálico",
+                nd: 6, ne: 1, nc: 60, medidas: "Permiso de trabajo, uso de arnés de cuerpo entero y línea de vida"
+            },
+
+            // --- MARKETING Y CX ---
+            {
+                id: 20, proceso: "Marketing y CX", cargo: "Diseñador Gráfico", zona: "Oficina Principal", actividades: "Creación de piezas gráficas", rutinaria: "SI",
+                clasificacion: "Biomecánico", descripcion: "Uso continuo del mouse, alta demanda visual en detalles", efectos: "Tendinitis de Quervain, fatiga visual severa",
+                nd: 2, ne: 4, nc: 10, medidas: "Mouse vertical, descansos visuales obligatorios, iluminación adecuada"
+            },
+
+            // --- FINANCIERO ---
+            {
+                id: 21, proceso: "Financiero", cargo: "Gerente Financiero", zona: "Oficina Principal", actividades: "Cierres contables, análisis de flujos", rutinaria: "SI",
+                clasificacion: "Psicosocial", descripcion: "Presión temporal (cierres de fin de mes), alta responsabilidad financiera", efectos: "Burnout, hipertensión por estrés",
+                nd: 6, ne: 2, nc: 10, medidas: "Planificación anticipada de cierres, pausas activas grupales"
+            },
+            {
+                id: 22, proceso: "Financiero", cargo: "Analista de Contabilidad", zona: "Oficina Principal", actividades: "Conciliación bancaria, digitación numérica", rutinaria: "SI",
+                clasificacion: "Biomecánico", descripcion: "Postura sedente en VDT, iluminación de pantallas", efectos: "Lumbago, fatiga visual",
+                nd: 2, ne: 4, nc: 10, medidas: "Filtros de luz azul en monitores, soporte lumbar"
+            },
+
+            // --- BODEGA Y LOGÍSTICA ---
+            {
+                id: 23, proceso: "Financiero - Bodega", cargo: "Asistente de Bodega", zona: "Bodega General", actividades: "Recepción, despacho y percheo de equipos (laptops, servidores)", rutinaria: "SI",
+                clasificacion: "Biomecánico", descripcion: "Levantamiento, transporte y empuje manual de cargas", efectos: "Hernias discales, lesiones dorsolumbares agudas",
+                nd: 6, ne: 4, nc: 25, medidas: "Uso de estibadores/carretillas manuales, faja de prevención (soporte), límite de 25kg"
+            },
+            {
+                id: 24, proceso: "Financiero - Bodega", cargo: "Asistente de Bodega", zona: "Bodega General", actividades: "Almacenamiento en estanterías altas", rutinaria: "SI",
+                clasificacion: "Condiciones de Seguridad", descripcion: "Locativo: Riesgo de caída de objetos desde alturas (perchas)", efectos: "Traumatismos contusos, golpes en la cabeza o pies",
+                nd: 6, ne: 3, nc: 25, medidas: "Uso de casco de seguridad, zapatos con puntera de acero, sujeción de cajas"
+            },
+            {
+                id: 25, proceso: "Financiero - Logística", cargo: "Mensajero", zona: "Trabajo de Campo", actividades: "Entrega de equipos y documentos en motocicleta", rutinaria: "SI",
+                clasificacion: "Condiciones de Seguridad", descripcion: "Accidentes de tránsito (colisiones, derrapes, caídas)", efectos: "Politraumatismos graves, invalidez, muerte",
+                nd: 6, ne: 4, nc: 100, medidas: "Casco certificado integral, guantes, chaqueta con protecciones, mantenimiento de moto"
+            },
+            {
+                id: 26, proceso: "Financiero - Logística", cargo: "Mensajero", zona: "Trabajo de Campo", actividades: "Desplazamiento a la intemperie", rutinaria: "SI",
+                clasificacion: "Fenómenos Naturales", descripcion: "Exposición a condiciones climáticas adversas (lluvia extrema, tormentas eléctricas)", efectos: "Resfriados, caídas de la moto por calzada mojada",
+                nd: 2, ne: 2, nc: 25, medidas: "Traje impermeable reflectivo, suspensión de ruta en tormenta severa"
+            },
+            {
+                id: 27, proceso: "Financiero - Logística", cargo: "Mensajero", zona: "Trabajo de Campo", actividades: "Desplazamiento a la intemperie diurno", rutinaria: "SI",
+                clasificacion: "Físico", descripcion: "Exposición a radiación solar UV de forma continua", efectos: "Quemaduras solares, insolación, cáncer de piel a largo plazo",
+                nd: 2, ne: 4, nc: 25, medidas: "Provisión y uso obligatorio de protector solar SPF 50+, ropa manga larga"
+            }
+        ];
+
+        // Función central del motor matemático GTC 45
+        function calcularGTC45(nd, ne, nc) {
+            nd = parseInt(nd);
+            ne = parseInt(ne);
+            nc = parseInt(nc);
+            
+            // Si ND es 0 (No se asigna), la GTC 45 indica no continuar la valoración cuantitativa o asumirla como controlada
+            if(nd === 0) return { np: 0, intNp: 'Bajo', nr: 0, intNr: 'IV', color: 'bg-green-100 text-green-800' };
+
+            let np = nd * ne;
+            let intNp = '';
+            if(np >= 24) intNp = 'Muy Alto';
+            else if(np >= 10) intNp = 'Alto';
+            else if(np >= 6) intNp = 'Medio';
+            else intNp = 'Bajo';
+
+            let nr = np * nc;
+            let intNr = '';
+            let color = '';
+
+            // Escala de Nivel de Riesgo GTC 45
+            if(nr >= 600) {
+                intNr = 'I (No Aceptable)';
+                color = 'bg-red-500 text-white font-bold';
+            } else if (nr >= 150) {
+                intNr = 'II (No Aceptable/Ctrl)';
+                color = 'bg-yellow-400 text-yellow-900 font-bold';
+            } else if (nr >= 40) {
+                intNr = 'III (Aceptable)';
+                color = 'bg-green-400 text-green-900 font-bold';
+            } else {
+                intNr = 'IV (Aceptable)';
+                color = 'bg-emerald-200 text-emerald-800 font-bold';
+            }
+
+            return { np, intNp, nr, intNr, color };
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('matrixBody');
+            tbody.innerHTML = '';
+            
+            let stats = { puestos: matrizData.length, i: 0, ii: 0, ok: 0 };
+
+            matrizData.forEach((row, index) => {
+                const evalData = calcularGTC45(row.nd, row.ne, row.nc);
+                
+                // Actualizar Estadísticas
+                if(evalData.nr >= 600) stats.i++;
+                else if(evalData.nr >= 150) stats.ii++;
+                else stats.ok++;
+
+                // Generar HTML fila
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-blue-50/50 transition-colors group';
+                tr.innerHTML = `
+                    <td class="p-3 border-b border-gray-200 sticky-col font-medium text-gray-800">${row.proceso}</td>
+                    <td class="p-3 border-b border-gray-200 sticky-col text-blue-600 font-medium" style="left: 150px;">${row.cargo}</td>
+                    <td class="p-3 border-b border-gray-200 border-l border-gray-200">${row.zona}</td>
+                    <td class="p-3 border-b border-gray-200 max-w-xs truncate" title="${row.actividades}">${row.actividades}</td>
+                    <td class="p-3 border-b border-gray-200 text-center">${row.rutinaria}</td>
+                    <td class="p-3 border-b border-gray-200 border-l border-gray-200 bg-gray-50/50"><span class="px-2 py-1 bg-gray-200 text-gray-700 rounded text-xs font-semibold">${row.clasificacion}</span></td>
+                    <td class="p-3 border-b border-gray-200 bg-gray-50/50 max-w-xs truncate" title="${row.descripcion}">${row.descripcion}</td>
+                    <td class="p-3 border-b border-gray-200 bg-gray-50/50 text-red-600 text-xs">${row.efectos}</td>
+                    <td class="p-3 border-b border-gray-200 border-l border-gray-200 text-center font-bold text-gray-600">${row.nd}</td>
+                    <td class="p-3 border-b border-gray-200 text-center font-bold text-gray-600">${row.ne}</td>
+                    <td class="p-3 border-b border-gray-200 text-center font-bold text-blue-600 bg-blue-50/30">${evalData.np}</td>
+                    <td class="p-3 border-b border-gray-200 text-center text-xs font-semibold text-gray-600 bg-blue-50/30">${evalData.intNp}</td>
+                    <td class="p-3 border-b border-gray-200 text-center font-bold text-gray-600">${row.nc}</td>
+                    <td class="p-3 border-b border-gray-200 border-l border-gray-200 text-center font-black text-lg ${evalData.color}">${evalData.nr}</td>
+                    <td class="p-3 border-b border-gray-200 text-center ${evalData.color} text-xs">${evalData.intNr}</td>
+                    <td class="p-3 border-b border-gray-200 border-l border-gray-200 text-xs text-gray-600 max-w-sm">${row.medidas}</td>
+                    <td class="p-3 border-b border-gray-200 text-center">
+                        <button onclick="deleteRisk(${index})" class="text-red-400 hover:text-red-600 p-1 rounded hover:bg-red-50" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Actualizar Dashboards
+            document.getElementById('stat-puestos').innerText = stats.puestos;
+            document.getElementById('stat-riesgos-i').innerText = stats.i;
+            document.getElementById('stat-riesgos-ii').innerText = stats.ii;
+            document.getElementById('stat-riesgos-ok').innerText = stats.ok;
+        }
+
+        function calcularRiesgoVisual() {
+            const nd = document.getElementById('form-nd').value;
+            const ne = document.getElementById('form-ne').value;
+            const nc = document.getElementById('form-nc').value;
+            
+            const r = calcularGTC45(nd, ne, nc);
+            
+            document.getElementById('preview-np').innerText = r.np;
+            document.getElementById('preview-nr').innerText = r.nr;
+            
+            const badge = document.getElementById('preview-badge');
+            badge.innerText = r.intNr;
+            badge.className = `px-3 py-1 rounded-full text-xs font-bold ${r.color}`;
+        }
+
+        function saveRisk() {
+            const newRisk = {
+                id: Date.now(),
+                proceso: document.getElementById('form-proceso').value,
+                cargo: document.getElementById('form-cargo').value,
+                zona: document.getElementById('form-zona').value,
+                actividades: document.getElementById('form-actividades').value,
+                rutinaria: document.getElementById('form-rutinaria').value,
+                clasificacion: document.getElementById('form-clasificacion').value,
+                descripcion: document.getElementById('form-desc').value,
+                efectos: document.getElementById('form-efectos').value,
+                nd: document.getElementById('form-nd').value,
+                ne: document.getElementById('form-ne').value,
+                nc: document.getElementById('form-nc').value,
+                medidas: document.getElementById('form-medidas').value
+            };
+
+            // Validar que no haya campos básicos vacíos
+            if(!newRisk.proceso || !newRisk.cargo || !newRisk.descripcion) {
+                alert("Por favor, completa los campos requeridos (Proceso, Cargo, Descripción del Peligro)."); // Native alert kept minimal for simple validation, replaced in real prod systems with toast
+                return;
+            }
+
+            matrizData.push(newRisk);
+            renderTable();
+            document.getElementById('modalRisk').classList.add('hidden');
+            document.getElementById('riskForm').reset();
+            calcularRiesgoVisual(); // Reset visualizer
+        }
+
+        function deleteRisk(index) {
+            // Modaled confirm replacement to avoid native alerts breaking iframe rules
+            matrizData.splice(index, 1);
+            renderTable();
+        }
+
+        // Buscador básico
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            const term = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#matrixBody tr');
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(term) ? '' : 'none';
+            });
+        });
+
+        // Init
+        window.onload = () => {
+            renderTable();
+            calcularRiesgoVisual();
+        };
+    </script>
+</body>
+</html>
