@@ -3,234 +3,427 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Módulo GTC 45 - Sistema Integrado de Gestión</title>
+    <title>SIG SSO - Compuequip DOS S.A.</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Chart.js para Dashboard -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- SheetJS para Exportación a Excel -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --brand-blue: #0b3d91; /* Ajuste a azul corporativo */
+            --brand-light: #e6f0fa;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
+            background-color: #f4f7fb;
         }
-        /* Custom scrollbar for the large matrix */
-        .table-container::-webkit-scrollbar {
-            height: 12px;
-            width: 12px;
+
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            height: 10px;
+            width: 8px;
         }
-        .table-container::-webkit-scrollbar-track {
-            background: #e5e7eb;
-            border-radius: 8px;
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
         }
-        .table-container::-webkit-scrollbar-thumb {
-            background-color: #9ca3af;
-            border-radius: 8px;
-            border: 3px solid #e5e7eb;
+        ::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 4px;
         }
-        .table-container::-webkit-scrollbar-thumb:hover {
-            background-color: #6b7280;
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #94a3b8;
         }
+
         .sticky-col {
             position: sticky;
             left: 0;
-            background-color: #f9fafb;
+            background-color: #f8fafc;
             z-index: 10;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+            box-shadow: 2px 0 5px rgba(0,0,0,0.03);
         }
+
+        /* Nav active state */
+        .nav-item.active {
+            background-color: var(--brand-blue);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(11, 61, 145, 0.3);
+        }
+
+        /* Fade-in animation for views */
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Organigrama Cards */
+        .org-card {
+            border-top: 4px solid var(--brand-blue);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .org-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Toast Notifications */
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .toast {
+            min-width: 300px;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .toast.success { background-color: #10b981; }
+        .toast.error { background-color: #ef4444; }
+        .toast.info { background-color: #3b82f6; }
     </style>
 </head>
-<body class="text-gray-800 h-screen flex overflow-hidden">
+<body class="text-slate-800 h-screen flex overflow-hidden">
 
-    <aside class="w-64 bg-slate-900 text-white flex flex-col hidden md:flex">
-        <div class="h-16 flex items-center px-6 border-b border-slate-700">
-            <i class="fa-solid fa-shield-halved text-blue-400 text-2xl mr-3"></i>
-            <span class="text-lg font-bold tracking-wider">SIG SSO</span>
+    <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col hidden md:flex shadow-2xl z-30">
+        <!-- Contenedor del Logo con fondo blanco para que resalte la versión a color -->
+        <div class="h-20 bg-white flex items-center justify-center px-4 border-b-4 border-blue-600 shadow-sm">
+            <img src="https://raw.githubusercontent.com/direccioncomercial/DOS-MATRIZ-DE-RIESGOS/main/logotipo-DOS-Color.png" 
+                 alt="DOS Compuequip" 
+                 class="max-h-12 object-contain"
+                 onerror="this.src='https://placehold.co/200x60/ffffff/0b3d91?text=DOS+Compuequip'">
         </div>
-        <div class="px-6 py-4 border-b border-slate-700">
-            <p class="text-xs text-slate-400 uppercase tracking-wider mb-1">Empresa</p>
-            <p class="text-sm font-semibold truncate text-blue-300">Compuequip DOS S.A.</p>
+        
+        <div class="px-6 py-5 border-b border-slate-800">
+            <p class="text-xs text-slate-500 uppercase tracking-widest mb-1 font-bold">Módulo Corporativo</p>
+            <p class="text-sm font-semibold truncate text-white">Sistema de Gestión SSO</p>
         </div>
-        <nav class="flex-1 px-4 py-4 space-y-2 overflow-y-auto">
-            <a href="#" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-lg transition-colors">
-                <i class="fa-solid fa-chart-pie w-6"></i> Dashboard
-            </a>
-            <a href="#" class="flex items-center px-4 py-3 bg-blue-600 text-white rounded-lg transition-colors shadow-lg shadow-blue-900/20">
-                <i class="fa-solid fa-table-list w-6"></i> Matriz GTC 45
-            </a>
-            <a href="#" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-lg transition-colors">
-                <i class="fa-solid fa-users w-6"></i> Organigrama
-            </a>
-            <a href="#" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-lg transition-colors">
-                <i class="fa-solid fa-file-contract w-6"></i> Inspecciones
-            </a>
-            <a href="#" class="flex items-center px-4 py-3 text-slate-300 hover:bg-slate-800 rounded-lg transition-colors">
-                <i class="fa-solid fa-gear w-6"></i> Configuración
-            </a>
+
+        <nav class="flex-1 px-4 py-6 space-y-3 overflow-y-auto">
+            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-item w-full flex items-center px-4 py-3 rounded-lg transition-all duration-200 hover:bg-slate-800 text-left">
+                <i class="fa-solid fa-chart-line w-7 text-lg"></i> <span class="font-medium">Dashboard</span>
+            </button>
+            <button onclick="switchTab('matriz')" id="nav-matriz" class="nav-item active w-full flex items-center px-4 py-3 rounded-lg transition-all duration-200 hover:bg-slate-800 text-left">
+                <i class="fa-solid fa-table-list w-7 text-lg"></i> <span class="font-medium">Matriz GTC 45</span>
+            </button>
+            <button onclick="switchTab('organigrama')" id="nav-organigrama" class="nav-item w-full flex items-center px-4 py-3 rounded-lg transition-all duration-200 hover:bg-slate-800 text-left">
+                <i class="fa-solid fa-sitemap w-7 text-lg"></i> <span class="font-medium">Organigrama</span>
+            </button>
+            <button onclick="switchTab('inspecciones')" id="nav-inspecciones" class="nav-item w-full flex items-center px-4 py-3 rounded-lg transition-all duration-200 hover:bg-slate-800 text-left">
+                <i class="fa-solid fa-clipboard-check w-7 text-lg"></i> <span class="font-medium">Inspecciones</span>
+            </button>
+            <button class="w-full flex items-center px-4 py-3 rounded-lg transition-all duration-200 hover:bg-slate-800 text-left text-slate-500 cursor-not-allowed" title="Próximamente">
+                <i class="fa-solid fa-gear w-7 text-lg"></i> <span class="font-medium">Configuración</span>
+            </button>
         </nav>
-        <div class="p-4 border-t border-slate-700">
+
+        <div class="p-5 border-t border-slate-800 bg-slate-950/50">
             <div class="flex items-center">
-                <img src="https://ui-avatars.com/api/?name=Director+SSO&background=0D8ABC&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold shadow-lg mr-3">
+                    DS
+                </div>
                 <div>
-                    <p class="text-sm font-medium">Director SSO</p>
-                    <p class="text-xs text-slate-400">Admin</p>
+                    <p class="text-sm font-bold text-white">Director SSO</p>
+                    <p class="text-xs text-blue-400">Administrador Lead</p>
                 </div>
             </div>
         </div>
     </aside>
 
-    <main class="flex-1 flex flex-col h-screen overflow-hidden">
-        <!-- Header -->
-        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 shadow-sm z-20">
+    <main class="flex-1 flex flex-col h-screen overflow-hidden bg-[#f4f7fb]">
+        <!-- Header Global -->
+        <header class="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shadow-sm z-20">
             <div class="flex items-center">
-                <button class="md:hidden text-gray-500 hover:text-gray-700 mr-4">
-                    <i class="fa-solid fa-bars text-xl"></i>
-                </button>
-                <h1 class="text-xl font-semibold text-gray-800">Identificación de Peligros y Valoración de Riesgos (GTC 45)</h1>
+                <h1 id="page-title" class="text-2xl font-bold text-slate-800 tracking-tight">Matriz de Riesgos GTC 45</h1>
             </div>
-            <div class="flex items-center space-x-4">
-                <button class="text-gray-400 hover:text-blue-600 transition">
-                    <i class="fa-solid fa-bell text-lg"></i>
+            <div class="flex items-center space-x-6">
+                <div class="text-sm text-slate-500 hidden md:block">
+                    <i class="fa-solid fa-calendar-alt mr-2"></i><span id="current-date"></span>
+                </div>
+                <button class="relative text-slate-400 hover:text-blue-600 transition p-2 rounded-full hover:bg-blue-50">
+                    <i class="fa-solid fa-bell text-xl"></i>
+                    <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
                 </button>
-                <button onclick="document.getElementById('modalRisk').classList.remove('hidden')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm flex items-center">
+                <button id="btn-global-action" onclick="abrirModalRiesgo()" class="bg-[#0b3d91] hover:bg-blue-800 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition shadow-md flex items-center">
                     <i class="fa-solid fa-plus mr-2"></i> Nuevo Riesgo
                 </button>
             </div>
         </header>
 
-        <div class="p-6 flex-1 overflow-hidden flex flex-col">
-            <!-- Stats Row -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex items-center">
-                    <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-4">
-                        <i class="fa-solid fa-briefcase text-xl"></i>
+        <!-- Contenedor de Vistas -->
+        <div class="flex-1 overflow-auto relative">
+            
+            <!-- VISTA: DASHBOARD -->
+            <section id="view-dashboard" class="hidden p-8 fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <!-- Tarjetas de Stats -->
+                    <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-100 border-l-4 border-l-blue-500">
+                        <p class="text-sm text-slate-500 font-semibold mb-1">Total Puestos</p>
+                        <p class="text-3xl font-black text-slate-800" id="dash-stat-puestos">0</p>
                     </div>
-                    <div>
-                        <p class="text-sm text-gray-500 font-medium">Puestos Evaluados</p>
-                        <p class="text-2xl font-bold text-gray-800" id="stat-puestos">0</p>
+                    <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-100 border-l-4 border-l-red-500">
+                        <p class="text-sm text-slate-500 font-semibold mb-1">No Aceptables (Nivel I)</p>
+                        <p class="text-3xl font-black text-red-600" id="dash-stat-i">0</p>
                     </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex items-center">
-                    <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 mr-4">
-                        <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+                    <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-100 border-l-4 border-l-yellow-400">
+                        <p class="text-sm text-slate-500 font-semibold mb-1">Riesgos Nivel II</p>
+                        <p class="text-3xl font-black text-yellow-600" id="dash-stat-ii">0</p>
                     </div>
-                    <div>
-                        <p class="text-sm text-gray-500 font-medium">Riesgos No Aceptables (I)</p>
-                        <p class="text-2xl font-bold text-gray-800" id="stat-riesgos-i">0</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex items-center">
-                    <div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 mr-4">
-                        <i class="fa-solid fa-bolt text-xl"></i>
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-500 font-medium">Riesgos Nivel II</p>
-                        <p class="text-2xl font-bold text-gray-800" id="stat-riesgos-ii">0</p>
+                    <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-100 border-l-4 border-l-emerald-500">
+                        <p class="text-sm text-slate-500 font-semibold mb-1">Riesgos Aceptables</p>
+                        <p class="text-3xl font-black text-emerald-600" id="dash-stat-ok">0</p>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-100 flex items-center">
-                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-4">
-                        <i class="fa-solid fa-check-shield text-xl"></i>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Niveles de Riesgo GTC 45</h3>
+                        <div class="relative h-64 flex justify-center">
+                            <canvas id="chartNiveles"></canvas>
+                        </div>
                     </div>
-                    <div>
-                        <p class="text-sm text-gray-500 font-medium">Riesgos Aceptables (III/IV)</p>
-                        <p class="text-2xl font-bold text-gray-800" id="stat-riesgos-ok">0</p>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4">Riesgos por Clasificación (Peligro)</h3>
+                        <div class="relative h-64">
+                            <canvas id="chartPeligros"></canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Matrix Table Area -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 flex-1 flex flex-col overflow-hidden relative">
+            <!-- VISTA: MATRIZ GTC 45 -->
+            <section id="view-matriz" class="p-6 h-full flex flex-col fade-in">
                 <!-- Toolbar -->
-                <div class="p-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
-                    <div class="relative w-64">
-                        <i class="fa-solid fa-search absolute left-3 top-2.5 text-gray-400"></i>
-                        <input type="text" id="searchInput" placeholder="Buscar cargo o proceso..." class="w-full pl-9 pr-4 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <div class="mb-4 flex flex-col md:flex-row justify-between items-center bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                    <div class="relative w-full md:w-80 mb-4 md:mb-0">
+                        <i class="fa-solid fa-search absolute left-4 top-3 text-slate-400"></i>
+                        <input type="text" id="searchInput" placeholder="Buscar cargo, proceso o peligro..." class="w-full pl-11 pr-4 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#0b3d91] bg-slate-50 transition">
                     </div>
-                    <div class="flex space-x-2">
-                        <button class="bg-white border border-gray-300 text-gray-700 px-3 py-2 rounded-lg text-sm hover:bg-gray-50 transition flex items-center">
-                            <i class="fa-solid fa-filter mr-2"></i> Filtros
-                        </button>
-                        <button class="bg-green-600 text-white px-3 py-2 rounded-lg text-sm hover:bg-green-700 transition flex items-center">
-                            <i class="fa-solid fa-file-excel mr-2"></i> Exportar
+                    <div class="flex space-x-3 w-full md:w-auto">
+                        <div class="flex items-center text-sm font-medium text-slate-500 mr-4">
+                            <span class="w-3 h-3 rounded-full bg-red-500 mr-2"></span>Críticos: <span id="badge-criticos" class="ml-1 font-bold text-slate-800">0</span>
+                        </div>
+                        <button onclick="exportarAExcel()" class="bg-[#107c41] text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-green-700 transition shadow flex items-center justify-center w-full md:w-auto">
+                            <i class="fa-solid fa-file-excel mr-2 text-lg"></i> Exportar XLS
                         </button>
                     </div>
                 </div>
 
-                <!-- Table Wrapper -->
-                <div class="overflow-auto table-container flex-1 bg-white">
-                    <table class="w-full text-left border-collapse min-w-[2000px]">
+                <!-- Contenedor de Tabla Scroll -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 flex-1 overflow-hidden flex flex-col relative">
+                    <div class="overflow-auto flex-1 table-container">
+                        <table class="w-full text-left border-collapse min-w-[2200px]" id="matrizTable">
+                            <thead>
+                                <tr class="bg-slate-800 text-white text-xs uppercase tracking-wider">
+                                    <th class="p-4 border-b border-slate-700 sticky-col font-bold">Proceso / Área</th>
+                                    <th class="p-4 border-b border-slate-700 sticky-col font-bold" style="left: 180px;">Puesto / Cargo</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold border-l border-slate-600">Zona/Lugar</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold">Actividades Principales</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold text-center">Rutinaria</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold border-l border-slate-600 bg-[#0b3d91]">Clasificación</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold bg-[#0b3d91]">Descripción del Peligro</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold bg-[#0b3d91]">Efectos Posibles</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold border-l border-slate-600 text-center" title="Nivel de Deficiencia">ND</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold text-center" title="Nivel de Exposición">NE</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold text-center text-blue-300" title="Nivel de Probabilidad">NP</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold text-center text-blue-300" title="Interpretación NP">Int. NP</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold text-center" title="Nivel de Consecuencia">NC</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold text-center border-l border-slate-600 bg-slate-900 text-yellow-400" title="Nivel de Riesgo">NR</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold text-center bg-slate-900 text-yellow-400">Int. NR</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold border-l border-slate-600">Medidas de Intervención (Existentes/Propuestas)</th>
+                                    <th class="p-4 border-b border-slate-700 font-bold text-center w-24">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="matrixBody" class="text-sm divide-y divide-slate-200">
+                                <!-- JS Populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VISTA: ORGANIGRAMA -->
+            <section id="view-organigrama" class="hidden p-8 fade-in">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
+                    <div class="text-center mb-10">
+                        <h2 class="text-2xl font-black text-slate-800">Estructura Organizacional</h2>
+                        <p class="text-slate-500 mt-2">Mapeo de Unidades de Negocio y Áreas de Soporte para Evaluación de Riesgos</p>
+                    </div>
+
+                    <!-- Nivel 1: Gerencia -->
+                    <div class="flex justify-center mb-8">
+                        <div class="org-card bg-slate-50 p-6 rounded-xl border border-slate-200 w-80 text-center shadow-sm relative">
+                            <div class="w-16 h-16 mx-auto bg-[#0b3d91] rounded-full flex items-center justify-center text-white text-xl mb-3 shadow-md">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </div>
+                            <h3 class="font-bold text-lg text-slate-800">Gerencia General</h3>
+                            <p class="text-sm text-slate-500 font-medium mt-1">Alta Dirección & Legal</p>
+                            <div class="mt-4 pt-3 border-t border-slate-200">
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded font-bold">2 Puestos Evaluados</span>
+                            </div>
+                            <!-- Connector line -->
+                            <div class="hidden md:block absolute w-0.5 h-8 bg-slate-300 left-1/2 -bottom-8"></div>
+                        </div>
+                    </div>
+
+                    <!-- Horizontal Connector line -->
+                    <div class="hidden md:block w-3/4 h-0.5 bg-slate-300 mx-auto relative mb-8">
+                        <div class="absolute w-0.5 h-8 bg-slate-300 left-0 top-0"></div>
+                        <div class="absolute w-0.5 h-8 bg-slate-300 left-1/4 top-0"></div>
+                        <div class="absolute w-0.5 h-8 bg-slate-300 left-2/4 top-0"></div>
+                        <div class="absolute w-0.5 h-8 bg-slate-300 left-3/4 top-0"></div>
+                        <div class="absolute w-0.5 h-8 bg-slate-300 right-0 top-0"></div>
+                    </div>
+
+                    <!-- Nivel 2: Direcciones / Jefaturas -->
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                        <!-- Comercial -->
+                        <div class="org-card bg-white p-5 rounded-xl border border-slate-200 text-center shadow-sm relative z-10">
+                            <h3 class="font-bold text-slate-800">Dir. Comercial</h3>
+                            <p class="text-xs text-slate-500 mt-1">UIO, CUE, GYE</p>
+                            <p class="text-xs text-slate-400 mt-2"><i class="fa-solid fa-users mr-1"></i>Ventas, Operaciones</p>
+                            <div class="mt-3"><span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded font-bold border border-slate-200">22 Expuestos</span></div>
+                        </div>
+                        
+                        <!-- Ciberseguridad & HC -->
+                        <div class="org-card bg-white p-5 rounded-xl border border-slate-200 text-center shadow-sm">
+                            <h3 class="font-bold text-slate-800">Ciberseguridad & Cloud</h3>
+                            <p class="text-xs text-slate-500 mt-1">Networking & Soluciones</p>
+                            <p class="text-xs text-slate-400 mt-2"><i class="fa-solid fa-server mr-1"></i>Arquitectos, Preventa</p>
+                            <div class="mt-3"><span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded font-bold border border-slate-200">8 Expuestos</span></div>
+                        </div>
+
+                        <!-- Servicios -->
+                        <div class="org-card bg-white p-5 rounded-xl border border-slate-200 text-center shadow-sm">
+                            <h3 class="font-bold text-slate-800">Servicios (CAS)</h3>
+                            <p class="text-xs text-slate-500 mt-1">Datacenter & Soporte</p>
+                            <p class="text-xs text-slate-400 mt-2"><i class="fa-solid fa-wrench mr-1"></i>Técnicos, Especialistas</p>
+                            <div class="mt-3"><span class="bg-red-50 text-red-700 text-xs px-2 py-1 rounded font-bold border border-red-200">Alto Riesgo - 34 Exp.</span></div>
+                        </div>
+
+                        <!-- Talento Humano -->
+                        <div class="org-card bg-white p-5 rounded-xl border border-slate-200 text-center shadow-sm">
+                            <h3 class="font-bold text-slate-800">Talento Humano</h3>
+                            <p class="text-xs text-slate-500 mt-1">Cultura & SSO</p>
+                            <p class="text-xs text-slate-400 mt-2"><i class="fa-solid fa-heart-pulse mr-1"></i>Médico, Técnicos</p>
+                            <div class="mt-3"><span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded font-bold border border-slate-200">11 Expuestos</span></div>
+                        </div>
+
+                        <!-- Financiero & Logística -->
+                        <div class="org-card bg-white p-5 rounded-xl border border-slate-200 text-center shadow-sm">
+                            <h3 class="font-bold text-slate-800">Financiero & Logística</h3>
+                            <p class="text-xs text-slate-500 mt-1">Contabilidad, Bodega</p>
+                            <p class="text-xs text-slate-400 mt-2"><i class="fa-solid fa-truck-fast mr-1"></i>Mensajeros, Analistas</p>
+                            <div class="mt-3"><span class="bg-yellow-50 text-yellow-700 text-xs px-2 py-1 rounded font-bold border border-yellow-200">R. Público - 9 Exp.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VISTA: INSPECCIONES -->
+            <section id="view-inspecciones" class="hidden p-8 fade-in">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Registro de Inspecciones Planeadas</h2>
+                        <p class="text-slate-500 text-sm">Seguimiento de condiciones de seguridad en instalaciones</p>
+                    </div>
+                    <button onclick="showToast('Módulo de creación de inspección en desarrollo.', 'info')" class="bg-white border border-slate-300 text-slate-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-50 transition shadow-sm">
+                        <i class="fa-solid fa-calendar-plus mr-2"></i> Programar Inspección
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="bg-slate-800 text-white text-xs uppercase tracking-wider">
-                                <th class="p-3 border-b border-slate-700 sticky-col font-semibold">Proceso / Área</th>
-                                <th class="p-3 border-b border-slate-700 sticky-col font-semibold" style="left: 150px;">Cargo</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold border-l border-slate-600">Zona/Lugar</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold">Actividades</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold text-center">Rut.</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold border-l border-slate-600 bg-slate-700">Clasificación Peligro</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold bg-slate-700">Descripción Peligro</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold bg-slate-700">Efectos Posibles</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold border-l border-slate-600 text-center" title="Nivel de Deficiencia">ND</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold text-center" title="Nivel de Exposición">NE</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold text-center" title="Nivel de Probabilidad">NP</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold text-center" title="Interpretación NP">Int. NP</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold text-center" title="Nivel de Consecuencia">NC</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold text-center border-l border-slate-600 bg-slate-900" title="Nivel de Riesgo">NR</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold text-center bg-slate-900">Int. NR</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold border-l border-slate-600">Medidas de Intervención</th>
-                                <th class="p-3 border-b border-slate-700 font-semibold text-center">Acciones</th>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase tracking-wider text-slate-500">
+                                <th class="p-4 font-bold">Fecha</th>
+                                <th class="p-4 font-bold">Tipo de Inspección</th>
+                                <th class="p-4 font-bold">Área / Locación</th>
+                                <th class="p-4 font-bold">Inspector</th>
+                                <th class="p-4 font-bold">Hallazgos</th>
+                                <th class="p-4 font-bold text-center">Estado</th>
+                                <th class="p-4 font-bold text-center">Acción</th>
                             </tr>
                         </thead>
-                        <tbody id="matrixBody" class="text-sm divide-y divide-gray-200">
-                            <!-- JS Will populate this -->
+                        <tbody class="text-sm divide-y divide-slate-100" id="inspeccionesBody">
+                            <!-- JS Populated -->
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </section>
+
         </div>
     </main>
 
     <!-- Modal for Add/Edit Risk -->
-    <div id="modalRisk" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden z-50 flex items-center justify-center overflow-y-auto">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl my-8 mx-4">
-            <div class="flex justify-between items-center p-6 border-b border-gray-100">
-                <h2 class="text-xl font-bold text-gray-800">Registrar / Editar Riesgo (GTC 45)</h2>
-                <button onclick="document.getElementById('modalRisk').classList.add('hidden')" class="text-gray-400 hover:text-red-500 text-2xl transition">&times;</button>
+    <div id="modalRisk" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-50 flex items-center justify-center overflow-y-auto">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl my-8 mx-4 border border-slate-200 transform transition-all">
+            <div class="flex justify-between items-center p-6 border-b border-slate-100 bg-slate-50 rounded-t-2xl">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-800">Registrar Riesgo (Metodología GTC 45)</h2>
+                    <p class="text-xs text-slate-500 mt-1">Complete los campos de identificación y valoración</p>
+                </div>
+                <button onclick="cerrarModalRiesgo()" class="text-slate-400 hover:text-red-500 text-2xl transition bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm border border-slate-200">&times;</button>
             </div>
             
             <form id="riskForm" class="p-6">
-                <!-- Sección 1: Puesto -->
-                <h3 class="text-sm font-bold text-blue-600 uppercase tracking-wider mb-4 border-b pb-2">1. Información del Puesto</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <!-- Sección 1 -->
+                <h3 class="text-sm font-bold text-[#0b3d91] uppercase tracking-wider mb-4 border-b border-blue-100 pb-2"><i class="fa-solid fa-briefcase mr-2"></i>1. Contexto del Puesto</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
                     <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Proceso / Área</label>
-                        <input type="text" id="form-proceso" required class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Proceso / Área *</label>
+                        <input type="text" id="form-proceso" required class="w-full rounded-lg border border-slate-300 p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-slate-50">
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Cargo</label>
-                        <input type="text" id="form-cargo" required class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Cargo *</label>
+                        <input type="text" id="form-cargo" required class="w-full rounded-lg border border-slate-300 p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-slate-50">
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Zona / Lugar</label>
-                        <input type="text" id="form-zona" required class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Zona / Lugar</label>
+                        <input type="text" id="form-zona" class="w-full rounded-lg border border-slate-300 p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition bg-slate-50">
                     </div>
                     <div class="md:col-span-2">
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Actividades Principales</label>
-                        <input type="text" id="form-actividades" required class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Actividades Principales</label>
+                        <input type="text" id="form-actividades" class="w-full rounded-lg border border-slate-300 p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition bg-slate-50">
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">¿Es Rutinaria?</label>
-                        <select id="form-rutinaria" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">¿Es Rutinaria?</label>
+                        <select id="form-rutinaria" class="w-full rounded-lg border border-slate-300 p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition bg-slate-50 font-semibold">
                             <option value="SI">SI</option>
                             <option value="NO">NO</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- Sección 2: Peligro -->
-                <h3 class="text-sm font-bold text-red-600 uppercase tracking-wider mb-4 border-b pb-2">2. Identificación del Peligro</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <!-- Sección 2 -->
+                <h3 class="text-sm font-bold text-orange-600 uppercase tracking-wider mb-4 border-b border-orange-100 pb-2"><i class="fa-solid fa-triangle-exclamation mr-2"></i>2. Identificación del Peligro</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
                     <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Clasificación</label>
-                        <select id="form-clasificacion" required class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Clasificación GTC 45 *</label>
+                        <select id="form-clasificacion" required class="w-full rounded-lg border border-slate-300 p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition bg-slate-50 font-semibold text-slate-700">
                             <option value="Biológico">Biológico</option>
                             <option value="Físico">Físico</option>
                             <option value="Químico">Químico</option>
@@ -241,316 +434,341 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Descripción del Peligro</label>
-                        <input type="text" id="form-desc" required class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Descripción del Peligro *</label>
+                        <input type="text" id="form-desc" required placeholder="Ej: Postura sedente prolongada..." class="w-full rounded-lg border border-slate-300 p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition bg-slate-50">
                     </div>
                     <div class="md:col-span-2">
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Efectos Posibles</label>
-                        <input type="text" id="form-efectos" required class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Efectos Posibles</label>
+                        <input type="text" id="form-efectos" placeholder="Enfermedades o lesiones probables..." class="w-full rounded-lg border border-slate-300 p-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition bg-slate-50">
                     </div>
                 </div>
 
-                <!-- Sección 3: Evaluación GTC 45 -->
-                <h3 class="text-sm font-bold text-green-600 uppercase tracking-wider mb-4 border-b pb-2">3. Evaluación (Cálculo Automático)</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <!-- Sección 3 -->
+                <h3 class="text-sm font-bold text-emerald-600 uppercase tracking-wider mb-4 border-b border-emerald-100 pb-2"><i class="fa-solid fa-calculator mr-2"></i>3. Evaluación Cuantitativa</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6 bg-[#f8fafc] p-5 rounded-xl border border-slate-200 shadow-inner">
                     <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Nivel de Deficiencia (ND)</label>
-                        <select id="form-nd" onchange="calcularRiesgoVisual()" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-                            <option value="10">10 - Muy Alto</option>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Nivel de Deficiencia (ND)</label>
+                        <select id="form-nd" onchange="calcularRiesgoVisual()" class="w-full rounded-lg border border-slate-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition bg-white">
+                            <option value="10">10 - Muy Alto (Peligro inminente)</option>
                             <option value="6">6 - Alto</option>
                             <option value="2">2 - Medio</option>
                             <option value="0">0 - No Asignar</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Nivel de Exposición (NE)</label>
-                        <select id="form-ne" onchange="calcularRiesgoVisual()" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-                            <option value="4">4 - Continua</option>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Nivel de Exposición (NE)</label>
+                        <select id="form-ne" onchange="calcularRiesgoVisual()" class="w-full rounded-lg border border-slate-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition bg-white">
+                            <option value="4">4 - Continua (>8h)</option>
                             <option value="3">3 - Frecuente</option>
                             <option value="2">2 - Ocasional</option>
                             <option value="1">1 - Esporádica</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">Nivel de Consecuencia (NC)</label>
-                        <select id="form-nc" onchange="calcularRiesgoVisual()" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Nivel de Consecuencia (NC)</label>
+                        <select id="form-nc" onchange="calcularRiesgoVisual()" class="w-full rounded-lg border border-slate-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition bg-white">
                             <option value="100">100 - Mortal / Catastrófico</option>
                             <option value="60">60 - Muy Grave</option>
-                            <option value="25">25 - Grave</option>
+                            <option value="25">25 - Grave (Incapacidad)</option>
                             <option value="10">10 - Leve</option>
                         </select>
                     </div>
                     
-                    <!-- Resultados calculados en tiempo real -->
-                    <div class="md:col-span-3 flex gap-4 mt-2 p-3 bg-white rounded shadow-sm border border-gray-100">
-                        <div class="flex-1 text-center border-r">
-                            <p class="text-xs text-gray-500">Probabilidad (NP = NDxNE)</p>
-                            <p id="preview-np" class="text-lg font-bold text-gray-800">--</p>
+                    <!-- Pre-visualizador del cálculo -->
+                    <div class="md:col-span-3 flex gap-4 mt-2 p-4 bg-white rounded-lg shadow border border-slate-100">
+                        <div class="flex-1 text-center border-r border-slate-100">
+                            <p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Probabilidad (ND x NE)</p>
+                            <p id="preview-np" class="text-2xl font-black text-slate-700">--</p>
                         </div>
-                        <div class="flex-1 text-center border-r">
-                            <p class="text-xs text-gray-500">Riesgo (NR = NPxNC)</p>
-                            <p id="preview-nr" class="text-lg font-bold text-gray-800">--</p>
+                        <div class="flex-1 text-center border-r border-slate-100">
+                            <p class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Riesgo (NP x NC)</p>
+                            <p id="preview-nr" class="text-2xl font-black text-slate-700">--</p>
                         </div>
                         <div class="flex-1 text-center flex items-center justify-center">
-                            <span id="preview-badge" class="px-3 py-1 rounded-full text-xs font-bold text-white bg-gray-400">Interpretación Nivel</span>
+                            <span id="preview-badge" class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-500 bg-slate-100 border border-slate-200">Interpretación Nivel</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="mb-6">
-                    <label class="block text-xs font-medium text-gray-700 mb-1">Medidas de Intervención (Eliminación, Sustitución, Ing, Admin, EPP)</label>
-                    <textarea id="form-medidas" rows="2" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Medidas de Intervención (Eliminación, Sustitución, Controles, EPP)</label>
+                    <textarea id="form-medidas" rows="2" class="w-full rounded-lg border border-slate-300 p-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition bg-slate-50"></textarea>
                 </div>
 
-                <div class="flex justify-end space-x-3 pt-4 border-t border-gray-100">
-                    <button type="button" onclick="document.getElementById('modalRisk').classList.add('hidden')" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 text-sm font-medium hover:bg-gray-50 transition">Cancelar</button>
-                    <button type="button" onclick="saveRisk()" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition shadow-md">Guardar en Matriz</button>
+                <div class="flex justify-end space-x-3 pt-5 border-t border-slate-200">
+                    <button type="button" onclick="cerrarModalRiesgo()" class="px-5 py-2.5 border border-slate-300 rounded-lg text-slate-600 text-sm font-bold hover:bg-slate-50 transition">Cancelar</button>
+                    <button type="button" onclick="guardarRiesgo()" class="px-5 py-2.5 bg-[#0b3d91] text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition shadow-md flex items-center">
+                        <i class="fa-solid fa-save mr-2"></i> Guardar Registro
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- Contenedor para notificaciones (Toast) -->
+    <div id="toast-container"></div>
+
     <script>
-        // Base de datos inicial precargada (Mapeo Compuequip DOS S.A.)
+        // --- BASE DE DATOS MOCK DE LA MATRIZ (COMPUEQUIP) ---
         let matrizData = [
-            // --- GERENCIA GENERAL ---
-            {
-                id: 1, proceso: "Gerencia General", cargo: "Gerente General", zona: "Oficina Principal", actividades: "Trabajo administrativo, reuniones estratégicas", rutinaria: "SI",
-                clasificacion: "Psicosocial", descripcion: "Gestión administrativa, carga mental, toma de decisiones de alto nivel", efectos: "Estrés crónico, ansiedad, fatiga mental",
-                nd: 2, ne: 3, nc: 10, medidas: "Pausas activas, jornadas flexibles, chequeo médico ejecutivo anual"
-            },
-            {
-                id: 2, proceso: "Gerencia General", cargo: "Abogado", zona: "Oficina Principal", actividades: "Revisión documental, lectura intensiva", rutinaria: "SI",
-                clasificacion: "Biomecánico", descripcion: "Postura sedente prolongada, uso de pantallas de visualización de datos (PVD)", efectos: "Fatiga visual, síndrome de ojo seco, lumbago",
-                nd: 2, ne: 4, nc: 10, medidas: "Pausas activas visuales (regla 20-20-20), silla ergonómica"
-            },
-            
-            // --- COMERCIAL ---
-            {
-                id: 3, proceso: "Comercial", cargo: "Gerente Comercial", zona: "Oficina Principal", actividades: "Planificación de metas, seguimiento de ventas", rutinaria: "SI",
-                clasificacion: "Psicosocial", descripcion: "Alta responsabilidad por resultados, atención a clientes críticos", efectos: "Estrés, alteraciones del sueño",
-                nd: 2, ne: 3, nc: 10, medidas: "Programa de bienestar laboral, pausas cognitivas"
-            },
-            {
-                id: 4, proceso: "Comercial", cargo: "Analista de Operaciones", zona: "Oficina Principal", actividades: "Digitación de contratos, CRM", rutinaria: "SI",
-                clasificacion: "Biomecánico", descripcion: "Movimientos repetitivos de mano/muñeca en uso de mouse y teclado", efectos: "Síndrome de túnel carpiano, tendinitis",
-                nd: 2, ne: 4, nc: 10, medidas: "Pad mouse con apoyo, teclado ergonómico, pausas activas"
-            },
-            {
-                id: 5, proceso: "Comercial", cargo: "Gerente de Cuentas", zona: "Trabajo de Campo", actividades: "Visita a clientes, traslado vehicular", rutinaria: "SI",
-                clasificacion: "Condiciones de Seguridad", descripcion: "Riesgo Público (delincuencia común, robos) en calle", efectos: "Heridas, estrés postraumático, pérdida de bienes",
-                nd: 6, ne: 3, nc: 25, medidas: "Capacitación en seguridad ciudadana, seguimiento GPS, seguros"
-            },
-            {
-                id: 6, proceso: "Comercial", cargo: "Gerente de Cuentas", zona: "Trabajo de Campo", actividades: "Conducción en vías urbanas/perimetrales", rutinaria: "SI",
-                clasificacion: "Condiciones de Seguridad", descripcion: "Accidentes de tránsito por colisión o atropellamiento", efectos: "Traumatismos severos, muerte",
-                nd: 6, ne: 3, nc: 60, medidas: "Manejo defensivo, revisión técnico-mecánica de la flota"
-            },
-
-            // --- CIBERSEGURIDAD & HYBRID CLOUD ---
-            {
-                id: 7, proceso: "Ciberseguridad", cargo: "Gerente de Ciberseguridad", zona: "Oficina Principal", actividades: "Monitoreo de alertas, gestión estratégica", rutinaria: "SI",
-                clasificacion: "Psicosocial", descripcion: "Carga de trabajo por incidentes críticos de seguridad 24/7", efectos: "Burnout, fatiga mental extrema",
-                nd: 6, ne: 3, nc: 10, medidas: "Rotación de turnos en soporte crítico, desconexión digital"
-            },
-            {
-                id: 8, proceso: "Ciberseguridad", cargo: "Arquitecto de Soluciones", zona: "Oficina Principal", actividades: "Diseño de infraestructuras IT", rutinaria: "SI",
-                clasificacion: "Biomecánico", descripcion: "Postura estática sedente frente a múltiples monitores", efectos: "Cervicalgia, dolor lumbar",
-                nd: 2, ne: 4, nc: 10, medidas: "Bases elevadoras de monitor, sillas ergonómicas de alto confort"
-            },
-            {
-                id: 9, proceso: "Hybrid Cloud", cargo: "Ingeniero Preventa", zona: "En Sitio (Cliente)", actividades: "Levantamiento de requerimientos en locaciones de clientes", rutinaria: "SI",
-                clasificacion: "Condiciones de Seguridad", descripcion: "Riesgos locativos (pisos resbalosos, desniveles) en empresas terceras", efectos: "Caídas al mismo nivel, esguinces, contusiones",
-                nd: 2, ne: 2, nc: 10, medidas: "Uso de calzado antideslizante, inducción en sitio del cliente"
-            },
-
-            // --- SERVICIOS: GESTIÓN Y ESPECIALISTAS ---
-            {
-                id: 10, proceso: "Servicios - Gestión", cargo: "Gerente de Servicios", zona: "Oficina Principal", actividades: "Administración de personal técnico, reportes", rutinaria: "SI",
-                clasificacion: "Psicosocial", descripcion: "Gestión de personal operativo, cumplimiento de SLAs", efectos: "Estrés ocupacional, cefaleas tensionales",
-                nd: 2, ne: 3, nc: 10, medidas: "Coaching de liderazgo, programas de manejo de tiempo"
-            },
-            {
-                id: 11, proceso: "Servicios - Especialistas", cargo: "Técnico Especialista (Data Center)", zona: "Datacenter", actividades: "Instalación de servidores, peinado de cables", rutinaria: "SI",
-                clasificacion: "Físico", descripcion: "Exposición a ruido continuo emitido por racks y sistemas AC", efectos: "Hipoacusia neurosensorial inducida por ruido",
-                nd: 2, ne: 4, nc: 25, medidas: "Protección auditiva tipo copa (NRR >25dB), audiometrías periódicas"
-            },
-            {
-                id: 12, proceso: "Servicios - Especialistas", cargo: "Técnico Especialista (Data Center)", zona: "Datacenter", actividades: "Conexión de PDUs y fuentes de poder", rutinaria: "NO",
-                clasificacion: "Condiciones de Seguridad", descripcion: "Riesgo eléctrico por manipulación de equipos energizados (baja tensión)", efectos: "Electrocución, quemaduras, paro cardíaco",
-                nd: 6, ne: 2, nc: 60, medidas: "Procedimiento de Bloqueo y Etiquetado (LOTO), herramientas dieléctricas"
-            },
-            {
-                id: 13, proceso: "Servicios - Especialistas", cargo: "Técnico Especialista (Data Center)", zona: "Datacenter", actividades: "Montaje de switches y servidores en racks", rutinaria: "NO",
-                clasificacion: "Biomecánico", descripcion: "Sobreesfuerzo por levantamiento manual de cargas (equipos pesados)", efectos: "Hernias discales, espasmos lumbares",
-                nd: 6, ne: 2, nc: 25, medidas: "Uso de elevadores mecánicos (rack lifts), trabajo en parejas"
-            },
-
-            // --- SERVICIOS: SOPORTE ---
-            {
-                id: 14, proceso: "Servicios - Soporte", cargo: "Técnico de Soporte", zona: "En Sitio (Cliente)", actividades: "Mantenimiento preventivo de computadoras", rutinaria: "SI",
-                clasificacion: "Biomecánico", descripcion: "Posturas forzadas (cuclillas, flexión de tronco) bajo escritorios", efectos: "Lesiones musculoesqueléticas de rodilla y columna",
-                nd: 6, ne: 3, nc: 10, medidas: "Capacitación en higiene postural, rodilleras de apoyo"
-            },
-            {
-                id: 15, proceso: "Servicios - Soporte", cargo: "Técnico de Soporte", zona: "Laboratorio", actividades: "Sopleteo y limpieza de componentes electrónicos", rutinaria: "SI",
-                clasificacion: "Físico", descripcion: "Proyección de material particulado (polvo) durante sopleteo", efectos: "Irritación ocular, conjuntivitis",
-                nd: 2, ne: 3, nc: 10, medidas: "Gafas de seguridad de policarbonato envolventes"
-            },
-            {
-                id: 16, proceso: "Servicios - Soporte", cargo: "Técnico de Soporte", zona: "Laboratorio", actividades: "Limpieza profunda de equipos", rutinaria: "SI",
-                clasificacion: "Químico", descripcion: "Inhalación de vapores por uso de alcohol isopropílico y limpia contactos", efectos: "Irritación de vías respiratorias, mareos",
-                nd: 2, ne: 2, nc: 10, medidas: "Uso en áreas ventiladas, mascarilla para vapores orgánicos"
-            },
-
-            // --- TALENTO HUMANO ---
-            {
-                id: 17, proceso: "Talento Humano", cargo: "VP Talento Humano", zona: "Oficina Principal", actividades: "Negociaciones, reestructuraciones", rutinaria: "SI",
-                clasificacion: "Psicosocial", descripcion: "Alta exigencia emocional en resolución de conflictos laborales", efectos: "Estrés agudo, trastornos gástricos",
-                nd: 2, ne: 2, nc: 10, medidas: "Línea de apoyo psicológico (EAP)"
-            },
-            {
-                id: 18, proceso: "Talento Humano", cargo: "Médico Ocupacional", zona: "Consultorio Médico", actividades: "Atención primaria a colaboradores enfermos", rutinaria: "SI",
-                clasificacion: "Biológico", descripcion: "Exposición a virus y bacterias patógenas por contacto directo", efectos: "Enfermedades infectocontagiosas (ej. Covid, Influenza)",
-                nd: 2, ne: 3, nc: 25, medidas: "EPP Biológico (Mascarilla N95, guantes), vacunación completa, lavado de manos"
-            },
-            {
-                id: 19, proceso: "Talento Humano", cargo: "Técnico SSO", zona: "Instalaciones", actividades: "Inspecciones de seguridad en altura y áreas operativas", rutinaria: "NO",
-                clasificacion: "Condiciones de Seguridad", descripcion: "Trabajo en alturas (inspección de techos, racks altos)", efectos: "Caída a distinto nivel, fracturas, trauma craneoencefálico",
-                nd: 6, ne: 1, nc: 60, medidas: "Permiso de trabajo, uso de arnés de cuerpo entero y línea de vida"
-            },
-
-            // --- MARKETING Y CX ---
-            {
-                id: 20, proceso: "Marketing y CX", cargo: "Diseñador Gráfico", zona: "Oficina Principal", actividades: "Creación de piezas gráficas", rutinaria: "SI",
-                clasificacion: "Biomecánico", descripcion: "Uso continuo del mouse, alta demanda visual en detalles", efectos: "Tendinitis de Quervain, fatiga visual severa",
-                nd: 2, ne: 4, nc: 10, medidas: "Mouse vertical, descansos visuales obligatorios, iluminación adecuada"
-            },
-
-            // --- FINANCIERO ---
-            {
-                id: 21, proceso: "Financiero", cargo: "Gerente Financiero", zona: "Oficina Principal", actividades: "Cierres contables, análisis de flujos", rutinaria: "SI",
-                clasificacion: "Psicosocial", descripcion: "Presión temporal (cierres de fin de mes), alta responsabilidad financiera", efectos: "Burnout, hipertensión por estrés",
-                nd: 6, ne: 2, nc: 10, medidas: "Planificación anticipada de cierres, pausas activas grupales"
-            },
-            {
-                id: 22, proceso: "Financiero", cargo: "Analista de Contabilidad", zona: "Oficina Principal", actividades: "Conciliación bancaria, digitación numérica", rutinaria: "SI",
-                clasificacion: "Biomecánico", descripcion: "Postura sedente en VDT, iluminación de pantallas", efectos: "Lumbago, fatiga visual",
-                nd: 2, ne: 4, nc: 10, medidas: "Filtros de luz azul en monitores, soporte lumbar"
-            },
-
-            // --- BODEGA Y LOGÍSTICA ---
-            {
-                id: 23, proceso: "Financiero - Bodega", cargo: "Asistente de Bodega", zona: "Bodega General", actividades: "Recepción, despacho y percheo de equipos (laptops, servidores)", rutinaria: "SI",
-                clasificacion: "Biomecánico", descripcion: "Levantamiento, transporte y empuje manual de cargas", efectos: "Hernias discales, lesiones dorsolumbares agudas",
-                nd: 6, ne: 4, nc: 25, medidas: "Uso de estibadores/carretillas manuales, faja de prevención (soporte), límite de 25kg"
-            },
-            {
-                id: 24, proceso: "Financiero - Bodega", cargo: "Asistente de Bodega", zona: "Bodega General", actividades: "Almacenamiento en estanterías altas", rutinaria: "SI",
-                clasificacion: "Condiciones de Seguridad", descripcion: "Locativo: Riesgo de caída de objetos desde alturas (perchas)", efectos: "Traumatismos contusos, golpes en la cabeza o pies",
-                nd: 6, ne: 3, nc: 25, medidas: "Uso de casco de seguridad, zapatos con puntera de acero, sujeción de cajas"
-            },
-            {
-                id: 25, proceso: "Financiero - Logística", cargo: "Mensajero", zona: "Trabajo de Campo", actividades: "Entrega de equipos y documentos en motocicleta", rutinaria: "SI",
-                clasificacion: "Condiciones de Seguridad", descripcion: "Accidentes de tránsito (colisiones, derrapes, caídas)", efectos: "Politraumatismos graves, invalidez, muerte",
-                nd: 6, ne: 4, nc: 100, medidas: "Casco certificado integral, guantes, chaqueta con protecciones, mantenimiento de moto"
-            },
-            {
-                id: 26, proceso: "Financiero - Logística", cargo: "Mensajero", zona: "Trabajo de Campo", actividades: "Desplazamiento a la intemperie", rutinaria: "SI",
-                clasificacion: "Fenómenos Naturales", descripcion: "Exposición a condiciones climáticas adversas (lluvia extrema, tormentas eléctricas)", efectos: "Resfriados, caídas de la moto por calzada mojada",
-                nd: 2, ne: 2, nc: 25, medidas: "Traje impermeable reflectivo, suspensión de ruta en tormenta severa"
-            },
-            {
-                id: 27, proceso: "Financiero - Logística", cargo: "Mensajero", zona: "Trabajo de Campo", actividades: "Desplazamiento a la intemperie diurno", rutinaria: "SI",
-                clasificacion: "Físico", descripcion: "Exposición a radiación solar UV de forma continua", efectos: "Quemaduras solares, insolación, cáncer de piel a largo plazo",
-                nd: 2, ne: 4, nc: 25, medidas: "Provisión y uso obligatorio de protector solar SPF 50+, ropa manga larga"
-            }
+            // Gerencia
+            { id: 1, proceso: "Gerencia General", cargo: "Gerente General", zona: "Oficina principal", actividades: "Trabajo administrativo, reuniones, uso de PVD", rutinaria: "SI", clasificacion: "Psicosocial", descripcion: "Carga mental, toma de decisiones, alto nivel de responsabilidad", efectos: "Estrés crónico, alteraciones del sueño", nd: 2, ne: 3, nc: 10, medidas: "Pausas activas, chequeo ejecutivo anual" },
+            { id: 2, proceso: "Gerencia General", cargo: "Abogado", zona: "Oficina principal", actividades: "Revisión documental intensiva, uso de PVD", rutinaria: "SI", clasificacion: "Biomecánico", descripcion: "Postura sedente prolongada, movimientos repetitivos en teclado", efectos: "Lumbago, fatiga visual, túnel carpiano", nd: 2, ne: 4, nc: 10, medidas: "Silla ergonómica, pausas visuales 20-20-20" },
+            // Comercial
+            { id: 3, proceso: "Comercial", cargo: "Gerente de Cuentas / Comercial", zona: "Oficina / Trabajo de Campo", actividades: "Visita a clientes, conducción de vehículos", rutinaria: "SI", clasificacion: "Condiciones de Seguridad", descripcion: "Riesgo Público (delincuencia, asaltos en vía pública)", efectos: "Heridas graves, estrés postraumático, muerte", nd: 6, ne: 3, nc: 60, medidas: "Capacitación seguridad ciudadana, seguros corporativos" },
+            { id: 4, proceso: "Comercial", cargo: "Gerente de Cuentas / Comercial", zona: "Oficina / Trabajo de Campo", actividades: "Conducción hacia instalaciones del cliente", rutinaria: "SI", clasificacion: "Condiciones de Seguridad", descripcion: "Accidentes de tránsito por colisión", efectos: "Politraumatismos, fracturas, muerte", nd: 6, ne: 3, nc: 60, medidas: "Curso manejo defensivo, mantenimiento vehicular" },
+            { id: 5, proceso: "Comercial", cargo: "Asistente de Operaciones", zona: "Oficina principal", actividades: "Digitación en CRM, trabajo administrativo", rutinaria: "SI", clasificacion: "Biomecánico", descripcion: "Postura prolongada, uso intensivo de mouse/teclado", efectos: "Tendinitis, dolores cervicales", nd: 2, ne: 4, nc: 10, medidas: "Pad mouse, descansapiés, pausas activas" },
+            // Ciberseguridad
+            { id: 6, proceso: "Ciberseguridad", cargo: "Arquitecto de Soluciones", zona: "Oficina / En sitio", actividades: "Diseño de infraestructuras, reuniones", rutinaria: "SI", clasificacion: "Psicosocial", descripcion: "Exigencia de tiempos, atención a incidentes críticos", efectos: "Burnout, estrés", nd: 6, ne: 2, nc: 10, medidas: "Gestión del tiempo, flexibilidad laboral" },
+            // Servicios
+            { id: 7, proceso: "Servicios - Datacenter", cargo: "Técnico Especialista", zona: "Datacenter", actividades: "Configuración en rack, instalación de hardware", rutinaria: "SI", clasificacion: "Físico", descripcion: "Ruido continuo por equipos y sistemas de enfriamiento", efectos: "Hipoacusia neurosensorial", nd: 2, ne: 4, nc: 25, medidas: "Protección auditiva (orejeras NRR>25), audiometría anual" },
+            { id: 8, proceso: "Servicios - Datacenter", cargo: "Técnico Especialista", zona: "Datacenter", actividades: "Instalación eléctrica y energización de equipos", rutinaria: "NO", clasificacion: "Condiciones de Seguridad", descripcion: "Riesgo Eléctrico (Baja Tensión)", efectos: "Quemaduras, shock eléctrico, fibrilación", nd: 6, ne: 2, nc: 60, medidas: "Bloqueo y etiquetado (LOTO), herramientas dieléctricas" },
+            { id: 9, proceso: "Servicios - Soporte", cargo: "Técnico de Soporte", zona: "En sitio (Cliente)", actividades: "Mantenimiento bajo escritorios", rutinaria: "SI", clasificacion: "Biomecánico", descripcion: "Posturas forzadas (cuclillas, flexión de tronco)", efectos: "Lesiones de rodilla y columna", nd: 6, ne: 3, nc: 10, medidas: "Capacitación higiene postural, rodilleras" },
+            { id: 10, proceso: "Servicios - Soporte", cargo: "Técnico de Soporte", zona: "Laboratorio", actividades: "Sopleteo y uso de químicos (Limpia contactos)", rutinaria: "SI", clasificacion: "Químico", descripcion: "Inhalación de vapores orgánicos y material particulado", efectos: "Irritación respiratoria, alergias", nd: 2, ne: 2, nc: 10, medidas: "Mascarilla media cara con filtros, área ventilada" },
+            // Talento Humano
+            { id: 11, proceso: "Talento Humano", cargo: "Médico Ocupacional", zona: "Consultorio", actividades: "Atención a pacientes, valoraciones", rutinaria: "SI", clasificacion: "Biológico", descripcion: "Exposición a virus y bacterias", efectos: "Enfermedades infectocontagiosas", nd: 2, ne: 3, nc: 25, medidas: "EPP biológico (Mascarilla N95, guantes), vacunación" },
+            { id: 12, proceso: "Talento Humano", cargo: "Técnico de SSO", zona: "Instalaciones", actividades: "Inspecciones en alturas o áreas técnicas", rutinaria: "NO", clasificacion: "Condiciones de Seguridad", descripcion: "Trabajo en Alturas (inspección sobre 1.8m)", efectos: "Caída a distinto nivel, muerte", nd: 6, ne: 1, nc: 100, medidas: "Permiso PTAR, Arnés, línea de vida" },
+            // Financiero Logística
+            { id: 13, proceso: "Logística", cargo: "Asistente de Bodega", zona: "Bodega", actividades: "Levantamiento manual de equipos pesados (servidores)", rutinaria: "SI", clasificacion: "Biomecánico", descripcion: "Sobreesfuerzo por manipulación manual de cargas", efectos: "Hernias discales, lumbago agudo", nd: 6, ne: 3, nc: 25, medidas: "Carretillas, polipastos, límite de peso manual" },
+            { id: 14, proceso: "Logística", cargo: "Mensajero", zona: "Trabajo de Campo", actividades: "Conducción de motocicleta en la ciudad", rutinaria: "SI", clasificacion: "Condiciones de Seguridad", descripcion: "Accidentes de tránsito en motocicleta", efectos: "Politraumatismos, invalidez, muerte", nd: 6, ne: 4, nc: 100, medidas: "Casco certificado, chaqueta protectora, rodilleras" }
         ];
 
-        // Función central del motor matemático GTC 45
-        function calcularGTC45(nd, ne, nc) {
-            nd = parseInt(nd);
-            ne = parseInt(ne);
-            nc = parseInt(nc);
+        // --- DATOS MOCK DE INSPECCIONES ---
+        let inspeccionesData = [
+            { fecha: '2026-10-05', tipo: 'Extintores y Botiquines', area: 'Oficina Matriz (Piso 2)', inspector: 'Director SSO', hallazgos: 'Extintor caducado en área de cafetería', estado: 'Cerrado' },
+            { fecha: '2026-10-08', tipo: 'Condiciones Inseguras', area: 'Bodega Principal', inspector: 'Técnico SSO', hallazgos: 'Cajas obstruyendo pasillo de emergencia', estado: 'Abierto' },
+            { fecha: '2026-10-10', tipo: 'Ergonomía', area: 'Área Comercial', inspector: 'Médico Ocupacional', hallazgos: 'Sillas defectuosas en 3 puestos', estado: 'En proceso' }
+        ];
+
+        let chartNivelesInstance = null;
+        let chartPeligrosInstance = null;
+
+        // --- SISTEMA DE TOAST (NOTIFICACIONES) ---
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
             
-            // Si ND es 0 (No se asigna), la GTC 45 indica no continuar la valoración cuantitativa o asumirla como controlada
-            if(nd === 0) return { np: 0, intNp: 'Bajo', nr: 0, intNr: 'IV', color: 'bg-green-100 text-green-800' };
-
-            let np = nd * ne;
-            let intNp = '';
-            if(np >= 24) intNp = 'Muy Alto';
-            else if(np >= 10) intNp = 'Alto';
-            else if(np >= 6) intNp = 'Medio';
-            else intNp = 'Bajo';
-
-            let nr = np * nc;
-            let intNr = '';
-            let color = '';
-
-            // Escala de Nivel de Riesgo GTC 45
-            if(nr >= 600) {
-                intNr = 'I (No Aceptable)';
-                color = 'bg-red-500 text-white font-bold';
-            } else if (nr >= 150) {
-                intNr = 'II (No Aceptable/Ctrl)';
-                color = 'bg-yellow-400 text-yellow-900 font-bold';
-            } else if (nr >= 40) {
-                intNr = 'III (Aceptable)';
-                color = 'bg-green-400 text-green-900 font-bold';
-            } else {
-                intNr = 'IV (Aceptable)';
-                color = 'bg-emerald-200 text-emerald-800 font-bold';
-            }
-
-            return { np, intNp, nr, intNr, color };
+            let icon = type === 'success' ? 'fa-check-circle' : (type === 'error' ? 'fa-triangle-exclamation' : 'fa-info-circle');
+            
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-xl mr-3"></i> <span class="text-sm font-medium">${message}</span>`;
+            
+            container.appendChild(toast);
+            
+            // Remover después de 3.5 segundos
+            setTimeout(() => {
+                toast.style.animation = 'slideIn 0.3s ease-in reverse forwards';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
         }
 
-        function renderTable() {
+        // --- MOTOR MATEMÁTICO GTC 45 ---
+        function calcularGTC45(nd, ne, nc) {
+            nd = parseInt(nd); ne = parseInt(ne); nc = parseInt(nc);
+            
+            if(nd === 0) return { np: 0, intNp: 'Bajo', nr: 0, intNr: 'IV', color: 'bg-emerald-100 text-emerald-800 border border-emerald-200', isCritical: false };
+
+            let np = nd * ne;
+            let intNp = np >= 24 ? 'Muy Alto' : (np >= 10 ? 'Alto' : (np >= 6 ? 'Medio' : 'Bajo'));
+
+            let nr = np * nc;
+            let intNr, color, isCritical = false;
+
+            if(nr >= 600) {
+                intNr = 'I (No Aceptable)';
+                color = 'bg-red-500 text-white shadow-sm';
+                isCritical = true;
+            } else if (nr >= 150) {
+                intNr = 'II (No Acept/Ctrl)';
+                color = 'bg-yellow-400 text-yellow-900 shadow-sm';
+                isCritical = true; // Nivel II también requiere intervención urgente
+            } else if (nr >= 40) {
+                intNr = 'III (Aceptable)';
+                color = 'bg-green-400 text-white shadow-sm';
+            } else {
+                intNr = 'IV (Aceptable)';
+                color = 'bg-emerald-200 text-emerald-800';
+            }
+
+            return { np, intNp, nr, intNr, color, isCritical };
+        }
+
+        // --- STREAMING_CHUNK:Lógica de Renderizado y Navegación... ---
+        function switchTab(viewId) {
+            // Ocultar todas las vistas
+            document.getElementById('view-dashboard').classList.add('hidden');
+            document.getElementById('view-matriz').classList.add('hidden');
+            document.getElementById('view-organigrama').classList.add('hidden');
+            document.getElementById('view-inspecciones').classList.add('hidden');
+            
+            // Desactivar botones nav
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            
+            // Activar seleccionada
+            document.getElementById('view-' + viewId).classList.remove('hidden');
+            document.getElementById('nav-' + viewId).classList.add('active');
+
+            // Actualizar Títulos y Botones Globales
+            const headerTitle = document.getElementById('page-title');
+            const globalBtn = document.getElementById('btn-global-action');
+            
+            if(viewId === 'dashboard') {
+                headerTitle.innerText = "Dashboard de SSO";
+                globalBtn.classList.add('hidden');
+                renderDashboard();
+            } else if(viewId === 'matriz') {
+                headerTitle.innerText = "Matriz de Riesgos (GTC 45)";
+                globalBtn.classList.remove('hidden');
+                globalBtn.innerHTML = '<i class="fa-solid fa-plus mr-2"></i> Nuevo Riesgo';
+                globalBtn.onclick = abrirModalRiesgo;
+            } else if(viewId === 'organigrama') {
+                headerTitle.innerText = "Organigrama Mapeado";
+                globalBtn.classList.add('hidden');
+            } else if(viewId === 'inspecciones') {
+                headerTitle.innerText = "Inspecciones de Seguridad";
+                globalBtn.classList.add('hidden');
+            }
+        }
+
+        function renderMatrix() {
             const tbody = document.getElementById('matrixBody');
             tbody.innerHTML = '';
             
-            let stats = { puestos: matrizData.length, i: 0, ii: 0, ok: 0 };
+            let stats = { puestos: matrizData.length, i: 0, ii: 0, ok: 0, criticosTotales: 0 };
 
             matrizData.forEach((row, index) => {
                 const evalData = calcularGTC45(row.nd, row.ne, row.nc);
                 
-                // Actualizar Estadísticas
-                if(evalData.nr >= 600) stats.i++;
-                else if(evalData.nr >= 150) stats.ii++;
+                if(evalData.nr >= 600) { stats.i++; stats.criticosTotales++; }
+                else if(evalData.nr >= 150) { stats.ii++; stats.criticosTotales++; }
                 else stats.ok++;
 
-                // Generar HTML fila
                 const tr = document.createElement('tr');
-                tr.className = 'hover:bg-blue-50/50 transition-colors group';
+                tr.className = 'hover:bg-slate-50 transition-colors group';
                 tr.innerHTML = `
-                    <td class="p-3 border-b border-gray-200 sticky-col font-medium text-gray-800">${row.proceso}</td>
-                    <td class="p-3 border-b border-gray-200 sticky-col text-blue-600 font-medium" style="left: 150px;">${row.cargo}</td>
-                    <td class="p-3 border-b border-gray-200 border-l border-gray-200">${row.zona}</td>
-                    <td class="p-3 border-b border-gray-200 max-w-xs truncate" title="${row.actividades}">${row.actividades}</td>
-                    <td class="p-3 border-b border-gray-200 text-center">${row.rutinaria}</td>
-                    <td class="p-3 border-b border-gray-200 border-l border-gray-200 bg-gray-50/50"><span class="px-2 py-1 bg-gray-200 text-gray-700 rounded text-xs font-semibold">${row.clasificacion}</span></td>
-                    <td class="p-3 border-b border-gray-200 bg-gray-50/50 max-w-xs truncate" title="${row.descripcion}">${row.descripcion}</td>
-                    <td class="p-3 border-b border-gray-200 bg-gray-50/50 text-red-600 text-xs">${row.efectos}</td>
-                    <td class="p-3 border-b border-gray-200 border-l border-gray-200 text-center font-bold text-gray-600">${row.nd}</td>
-                    <td class="p-3 border-b border-gray-200 text-center font-bold text-gray-600">${row.ne}</td>
-                    <td class="p-3 border-b border-gray-200 text-center font-bold text-blue-600 bg-blue-50/30">${evalData.np}</td>
-                    <td class="p-3 border-b border-gray-200 text-center text-xs font-semibold text-gray-600 bg-blue-50/30">${evalData.intNp}</td>
-                    <td class="p-3 border-b border-gray-200 text-center font-bold text-gray-600">${row.nc}</td>
-                    <td class="p-3 border-b border-gray-200 border-l border-gray-200 text-center font-black text-lg ${evalData.color}">${evalData.nr}</td>
-                    <td class="p-3 border-b border-gray-200 text-center ${evalData.color} text-xs">${evalData.intNr}</td>
-                    <td class="p-3 border-b border-gray-200 border-l border-gray-200 text-xs text-gray-600 max-w-sm">${row.medidas}</td>
-                    <td class="p-3 border-b border-gray-200 text-center">
-                        <button onclick="deleteRisk(${index})" class="text-red-400 hover:text-red-600 p-1 rounded hover:bg-red-50" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                    <td class="p-3 border-b border-slate-200 sticky-col font-medium text-slate-800">${row.proceso}</td>
+                    <td class="p-3 border-b border-slate-200 sticky-col font-bold text-[#0b3d91]" style="left: 180px;">${row.cargo}</td>
+                    <td class="p-3 border-b border-slate-200 border-l border-slate-200 text-slate-600">${row.zona}</td>
+                    <td class="p-3 border-b border-slate-200 max-w-xs truncate text-slate-600" title="${row.actividades}">${row.actividades}</td>
+                    <td class="p-3 border-b border-slate-200 text-center font-medium">${row.rutinaria}</td>
+                    <td class="p-3 border-b border-slate-200 border-l border-slate-200 bg-slate-50"><span class="px-2.5 py-1 bg-slate-200 text-slate-700 rounded-md text-[11px] font-bold uppercase tracking-wider">${row.clasificacion}</span></td>
+                    <td class="p-3 border-b border-slate-200 bg-slate-50 max-w-xs truncate text-slate-800" title="${row.descripcion}">${row.descripcion}</td>
+                    <td class="p-3 border-b border-slate-200 bg-slate-50 text-red-600 font-medium text-xs leading-tight">${row.efectos}</td>
+                    <td class="p-3 border-b border-slate-200 border-l border-slate-200 text-center font-bold text-slate-500">${row.nd}</td>
+                    <td class="p-3 border-b border-slate-200 text-center font-bold text-slate-500">${row.ne}</td>
+                    <td class="p-3 border-b border-slate-200 text-center font-black text-blue-600 bg-blue-50/50">${evalData.np}</td>
+                    <td class="p-3 border-b border-slate-200 text-center text-xs font-bold text-slate-500 bg-blue-50/50">${evalData.intNp}</td>
+                    <td class="p-3 border-b border-slate-200 text-center font-bold text-slate-500">${row.nc}</td>
+                    <td class="p-3 border-b border-slate-200 border-l border-slate-200 text-center font-black text-lg ${evalData.color} rounded-l-lg">${evalData.nr}</td>
+                    <td class="p-3 border-b border-slate-200 text-center ${evalData.color} text-[11px] font-bold tracking-tight rounded-r-lg">${evalData.intNr}</td>
+                    <td class="p-3 border-b border-slate-200 border-l border-slate-200 text-xs text-slate-600 leading-tight max-w-sm"><i class="fa-solid fa-shield-halved text-emerald-500 mr-1"></i> ${row.medidas}</td>
+                    <td class="p-3 border-b border-slate-200 text-center">
+                        <button onclick="eliminarRiesgo(${index})" class="text-slate-300 hover:text-red-500 p-1.5 rounded hover:bg-red-50 transition" title="Eliminar"><i class="fa-solid fa-trash-can"></i></button>
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
 
-            // Actualizar Dashboards
-            document.getElementById('stat-puestos').innerText = stats.puestos;
-            document.getElementById('stat-riesgos-i').innerText = stats.i;
-            document.getElementById('stat-riesgos-ii').innerText = stats.ii;
-            document.getElementById('stat-riesgos-ok').innerText = stats.ok;
+            // Actualizar contadores ocultos
+            document.getElementById('badge-criticos').innerText = stats.criticosTotales;
+            document.getElementById('dash-stat-puestos').innerText = stats.puestos;
+            document.getElementById('dash-stat-i').innerText = stats.i;
+            document.getElementById('dash-stat-ii').innerText = stats.ii;
+            document.getElementById('dash-stat-ok').innerText = stats.ok;
+        }
+
+        function renderInspections() {
+            const tbody = document.getElementById('inspeccionesBody');
+            tbody.innerHTML = '';
+            
+            inspeccionesData.forEach(insp => {
+                let statusColor = insp.estado === 'Cerrado' ? 'bg-emerald-100 text-emerald-700' : 
+                                 (insp.estado === 'Abierto' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700');
+                
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition-colors';
+                tr.innerHTML = `
+                    <td class="p-4 font-medium text-slate-800"><i class="fa-regular fa-calendar mr-2 text-slate-400"></i>${insp.fecha}</td>
+                    <td class="p-4 text-slate-600 font-semibold">${insp.tipo}</td>
+                    <td class="p-4 text-slate-600">${insp.area}</td>
+                    <td class="p-4 text-slate-500">${insp.inspector}</td>
+                    <td class="p-4 text-slate-600 text-xs">${insp.hallazgos}</td>
+                    <td class="p-4 text-center">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold ${statusColor}">${insp.estado}</span>
+                    </td>
+                    <td class="p-4 text-center">
+                        <button class="text-blue-500 hover:text-blue-700 font-semibold text-xs">Ver Detalle</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // --- STREAMING_CHUNK:Lógica de Dashboard y Gráficos (Chart.js)... ---
+        function renderDashboard() {
+            // Preparar datos para gráficos
+            let nivelesCount = { i: 0, ii: 0, iii: 0, iv: 0 };
+            let peligrosCount = {};
+
+            matrizData.forEach(row => {
+                const evalData = calcularGTC45(row.nd, row.ne, row.nc);
+                if(evalData.nr >= 600) nivelesCount.i++;
+                else if(evalData.nr >= 150) nivelesCount.ii++;
+                else if(evalData.nr >= 40) nivelesCount.iii++;
+                else nivelesCount.iv++;
+
+                peligrosCount[row.clasificacion] = (peligrosCount[row.clasificacion] || 0) + 1;
+            });
+
+            // Destroy previous instances to avoid overlap
+            if(chartNivelesInstance) chartNivelesInstance.destroy();
+            if(chartPeligrosInstance) chartPeligrosInstance.destroy();
+
+            // Gráfico Anillo (Niveles)
+            const ctxNiveles = document.getElementById('chartNiveles').getContext('2d');
+            chartNivelesInstance = new Chart(ctxNiveles, {
+                type: 'doughnut',
+                data: {
+                    labels: ['I (No Aceptable)', 'II (Aceptable con Control)', 'III (Aceptable)', 'IV (Aceptable)'],
+                    datasets: [{
+                        data: [nivelesCount.i, nivelesCount.ii, nivelesCount.iii, nivelesCount.iv],
+                        backgroundColor: ['#ef4444', '#facc15', '#4ade80', '#a7f3d0'],
+                        borderWidth: 0
+                    }]
+                },
+                options: { maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+            });
+
+            // Gráfico Barras (Peligros)
+            const ctxPeligros = document.getElementById('chartPeligros').getContext('2d');
+            chartPeligrosInstance = new Chart(ctxPeligros, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(peligrosCount),
+                    datasets: [{
+                        label: 'Cantidad de Riesgos Identificados',
+                        data: Object.values(peligrosCount),
+                        backgroundColor: '#0b3d91',
+                        borderRadius: 4
+                    }]
+                },
+                options: { 
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, ticks: { precision: 0 } } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // --- STREAMING_CHUNK:Lógica del Formulario y Modal... ---
+        function abrirModalRiesgo() {
+            document.getElementById('riskForm').reset();
+            document.getElementById('modalRisk').classList.remove('hidden');
+            calcularRiesgoVisual();
+        }
+
+        function cerrarModalRiesgo() {
+            document.getElementById('modalRisk').classList.add('hidden');
         }
 
         function calcularRiesgoVisual() {
@@ -565,10 +783,16 @@
             
             const badge = document.getElementById('preview-badge');
             badge.innerText = r.intNr;
-            badge.className = `px-3 py-1 rounded-full text-xs font-bold ${r.color}`;
+            badge.className = `px-4 py-1.5 rounded-full text-xs font-bold shadow-sm ${r.color}`;
         }
 
-        function saveRisk() {
+        function guardarRiesgo() {
+            const form = document.getElementById('riskForm');
+            if(!form.checkValidity()) {
+                showToast("Por favor complete todos los campos obligatorios (*).", "error");
+                return;
+            }
+
             const newRisk = {
                 id: Date.now(),
                 proceso: document.getElementById('form-proceso').value,
@@ -585,26 +809,65 @@
                 medidas: document.getElementById('form-medidas').value
             };
 
-            // Validar que no haya campos básicos vacíos
-            if(!newRisk.proceso || !newRisk.cargo || !newRisk.descripcion) {
-                alert("Por favor, completa los campos requeridos (Proceso, Cargo, Descripción del Peligro)."); // Native alert kept minimal for simple validation, replaced in real prod systems with toast
-                return;
-            }
-
-            matrizData.push(newRisk);
-            renderTable();
-            document.getElementById('modalRisk').classList.add('hidden');
-            document.getElementById('riskForm').reset();
-            calcularRiesgoVisual(); // Reset visualizer
+            matrizData.unshift(newRisk); // Agregar al principio
+            renderMatrix();
+            cerrarModalRiesgo();
+            showToast("Riesgo guardado e integrado a la Matriz GTC 45 exitosamente.", "success");
         }
 
-        function deleteRisk(index) {
-            // Modaled confirm replacement to avoid native alerts breaking iframe rules
+        function eliminarRiesgo(index) {
             matrizData.splice(index, 1);
-            renderTable();
+            renderMatrix();
+            showToast("Registro eliminado de la Matriz.", "info");
         }
 
-        // Buscador básico
+        // --- STREAMING_CHUNK:Lógica de Exportación a Excel (SheetJS)... ---
+        function exportarAExcel() {
+            showToast("Generando archivo Excel corporativo...", "info");
+            
+            // Formatear datos para Excel amigable
+            const dataToExport = matrizData.map(row => {
+                const evalData = calcularGTC45(row.nd, row.ne, row.nc);
+                return {
+                    "Proceso / Área": row.proceso,
+                    "Cargo / Puesto": row.cargo,
+                    "Zona": row.zona,
+                    "Actividades": row.actividades,
+                    "Rutinaria": row.rutinaria,
+                    "Clasificación Peligro": row.clasificacion,
+                    "Descripción": row.descripcion,
+                    "Efectos Posibles": row.efectos,
+                    "ND (Deficiencia)": row.nd,
+                    "NE (Exposición)": row.ne,
+                    "NP (Probabilidad)": evalData.np,
+                    "Int. NP": evalData.intNp,
+                    "NC (Consecuencia)": row.nc,
+                    "NR (Riesgo)": evalData.nr,
+                    "Interpretación Nivel Riesgo": evalData.intNr,
+                    "Medidas de Intervención": row.medidas
+                };
+            });
+
+            // Crear libro y hoja
+            const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+            
+            // Auto-ajuste simple de ancho de columnas
+            const wscols = [
+                {wch: 20}, {wch: 25}, {wch: 15}, {wch: 35}, {wch: 10}, 
+                {wch: 25}, {wch: 40}, {wch: 30}, {wch: 15}, {wch: 15}, 
+                {wch: 15}, {wch: 15}, {wch: 15}, {wch: 15}, {wch: 25}, {wch: 45}
+            ];
+            worksheet['!cols'] = wscols;
+
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Matriz_GTC45");
+
+            // Descargar
+            XLSX.writeFile(workbook, "Matriz_Riesgos_GTC45_Compuequip.xlsx");
+            setTimeout(() => showToast("Descarga completada.", "success"), 1000);
+        }
+
+        // Buscador
         document.getElementById('searchInput').addEventListener('keyup', function(e) {
             const term = e.target.value.toLowerCase();
             const rows = document.querySelectorAll('#matrixBody tr');
@@ -614,10 +877,18 @@
             });
         });
 
-        // Init
+        // --- INICIALIZACIÓN ---
         window.onload = () => {
-            renderTable();
-            calcularRiesgoVisual();
+            // Set Date
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').innerText = new Date().toLocaleDateString('es-ES', options);
+
+            // Renders Iniciales
+            renderMatrix();
+            renderInspections();
+            
+            // Iniciar en la pestaña de matriz por defecto
+            switchTab('matriz');
         };
     </script>
 </body>
